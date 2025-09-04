@@ -1,0 +1,801 @@
+"use client"
+
+import { useState, useMemo } from "react"
+import {
+  Search,
+  ExternalLink,
+  Calendar,
+  Users,
+  BookOpen,
+  Download,
+  ChevronDown,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+
+// Academic papers data extracted from the BibTeX
+const papers = [
+  {
+    id: 14,
+    title:
+      "Enhancing the Efficiency of a Cybersecurity Operations Center Using Biomimetic Algorithms Empowered by Deep Q-Learning",
+    authors: ["Rodrigo Olivares", "Omar Salinas", "Camilo Ravelo", "Ricardo Soto", "Broderick Crawford"],
+    journal: "Biomimetics",
+    year: 2024,
+    volume: "9(6)",
+    pages: "307",
+    doi: "10.3390/biomimetics9060307",
+    url: "http://dx.doi.org/10.3390/biomimetics9060307",
+    type: "article",
+    keywords: ["cybersecurity", "biomimetic algorithms", "deep learning", "optimization"],
+    abstract:
+      "This research explores the application of biomimetic algorithms enhanced with Deep Q-Learning to improve cybersecurity operations center efficiency. The study presents a novel approach that combines nature-inspired optimization techniques with reinforcement learning to address complex security challenges in modern cybersecurity environments. The proposed methodology demonstrates significant improvements in threat detection, response time, and resource allocation within security operations centers, providing a comprehensive framework for enhancing cybersecurity infrastructure through intelligent automation and adaptive learning mechanisms.",
+  },
+  {
+    id: 13,
+    title: "Intelligent Learning-Based Methods for Determining the Ideal Team Size in Agile Practices",
+    authors: ["Rodrigo Olivares", "Rene Noel", "Sebastián M. Guzmán", "Diego Miranda", "Roberto Munoz"],
+    journal: "Biomimetics",
+    year: 2024,
+    volume: "9(5)",
+    pages: "292",
+    doi: "10.3390/biomimetics9050292",
+    url: "http://dx.doi.org/10.3390/biomimetics9050292",
+    type: "article",
+    keywords: ["agile practices", "team optimization", "machine learning", "software engineering"],
+    abstract:
+      "This study presents intelligent learning-based methods for determining optimal team sizes in agile software development practices. The research addresses the critical challenge of team composition in agile methodologies by leveraging machine learning algorithms to analyze project characteristics, team dynamics, and performance metrics. The proposed approach considers multiple factors including project complexity, skill diversity, communication overhead, and productivity patterns to recommend ideal team configurations. The methodology has been validated through extensive empirical studies showing improved project outcomes and team satisfaction rates.",
+  },
+  {
+    id: 12,
+    title:
+      "Escaping Stagnation through Improved Orca Predator Algorithm with Deep Reinforcement Learning for Feature Selection",
+    authors: ["Rodrigo Olivares", "Camilo Ravelo", "Ricardo Soto", "Broderick Crawford"],
+    journal: "Mathematics",
+    year: 2024,
+    volume: "12(9)",
+    pages: "1249",
+    doi: "doi.org/10.3390/math12081249",
+    url: "https://doi.org/10.3390/math12081249",
+    type: "article",
+    keywords: ["feature selection", "orca algorithm", "reinforcement learning", "optimization"],
+    abstract:
+      "This paper introduces an enhanced Orca Predator Algorithm incorporating deep reinforcement learning mechanisms to overcome stagnation problems in feature selection tasks. The research addresses the common issue of premature convergence in metaheuristic algorithms by implementing adaptive learning strategies that enable the algorithm to escape local optima. The proposed method combines the hunting behavior of orcas with Q-learning techniques to dynamically adjust search parameters and exploration strategies. Experimental results demonstrate superior performance in high-dimensional feature selection problems across various datasets, showing significant improvements in classification accuracy and computational efficiency.",
+  },
+  {
+    id: 11,
+    title: "Reduction of Search Space for Cuckoo Search Algorithm Applied to Feature Selection",
+    authors: ["Rodrigo Olivares", "Victor Rios", "Pablo Olivares", "Benjamín Serrano"],
+    journal: "CISTI'2024 - 19th Iberian Conference on Information Systems and Technologies",
+    year: 2024,
+    volume: "",
+    pages: "1–6",
+    doi: "10.1007/",
+    url: "http://dx.doi.org/10.1007/",
+    type: "conference",
+    keywords: ["cuckoo search", "feature selection", "search space reduction", "optimization"],
+    abstract:
+      "This work presents a novel approach to reduce search space complexity in the Cuckoo Search Algorithm for more efficient feature selection in high-dimensional datasets. The research introduces preprocessing techniques and intelligent search space partitioning strategies that significantly reduce computational overhead while maintaining solution quality. The proposed method incorporates feature relevance analysis and correlation-based filtering to eliminate redundant search regions before applying the cuckoo search optimization. Experimental validation on benchmark datasets demonstrates substantial improvements in convergence speed and feature subset quality compared to traditional approaches.",
+  },
+  {
+    id: 10,
+    title:
+      "A learning-based Particle Swarm Optimization to detect local optima stagnation for solving the Dial-a-Ride Problem",
+    authors: ["Rodrigo Olivares", "Pablo Olivares", "Victor Rios", "Benjamín Serrano"],
+    journal: "CISTI'2024 - 19th Iberian Conference on Information Systems and Technologies",
+    year: 2024,
+    volume: "",
+    pages: "1–6",
+    doi: "10.1007/",
+    url: "http://dx.doi.org/10.1007/",
+    type: "conference",
+    keywords: ["particle swarm optimization", "dial-a-ride problem", "local optima", "transportation"],
+    abstract:
+      "This research presents a learning-based Particle Swarm Optimization approach specifically designed to detect and escape local optima stagnation when solving the Dial-a-Ride Problem. The study addresses the challenge of providing efficient transportation services for passengers with specific pickup and delivery requirements. The proposed algorithm incorporates adaptive learning mechanisms that monitor convergence patterns and automatically adjust swarm parameters to maintain exploration capabilities. The method includes stagnation detection strategies and diversification techniques that enable the algorithm to escape local optima and continue searching for better solutions in the complex solution space of transportation routing problems.",
+  },
+  {
+    id: 9,
+    title: "0/1 1-D bin packing problem solved by a recent nature-inspired optimizer",
+    authors: ["Rodrigo Olivares", "Sebastian M. Guzmán", "Jaime Godoy"],
+    journal: "Machine Learning Methods in Systems",
+    year: 2024,
+    volume: "",
+    pages: "437–445",
+    doi: "10.1007/978-3-031-70595-3_45",
+    url: "http://dx.doi.org/10.1007/978-3-031-70595-3_45",
+    type: "conference",
+    keywords: ["bin packing", "nature-inspired optimization", "combinatorial optimization", "algorithms"],
+    abstract:
+      "This study applies a recent nature-inspired optimization algorithm to solve the challenging 0/1 one-dimensional bin packing problem. The research explores the effectiveness of bio-inspired metaheuristics in addressing this NP-hard combinatorial optimization problem, which has significant applications in logistics, resource allocation, and manufacturing. The proposed approach incorporates adaptive mechanisms that balance exploration and exploitation to efficiently pack items into bins while minimizing waste. Comprehensive experimental analysis demonstrates the algorithm's competitive performance against established methods, showing improved solution quality and computational efficiency across various problem instances and bin capacities.",
+  },
+  {
+    id: 8,
+    title: "Reinforcement learning applied to PSO for Multidimensional Knapsack Problem",
+    authors: ["Rodrigo Olivares", "Victor Rios", "Pablo Olivares", "Benjamin Serrano"],
+    journal: "Machine Learning Methods in Systems",
+    year: 2024,
+    volume: "",
+    pages: "375–382",
+    doi: "10.1007/978-3-031-70595-3_38",
+    url: "http://dx.doi.org/10.1007/978-3-031-70595-3_38",
+    type: "conference",
+    keywords: [
+      "reinforcement learning",
+      "particle swarm optimization",
+      "knapsack problem",
+      "multidimensional optimization",
+    ],
+    abstract:
+      "This research integrates reinforcement learning techniques with Particle Swarm Optimization to tackle the complex Multidimensional Knapsack Problem. The study addresses the challenge of selecting items with multiple constraints and objectives, which is fundamental in resource allocation and portfolio optimization. The proposed hybrid approach uses Q-learning to adaptively adjust PSO parameters during the optimization process, enabling the algorithm to learn from previous experiences and improve decision-making strategies. The reinforcement learning component helps the swarm adapt to different problem characteristics and constraint configurations, resulting in more robust and efficient solutions for multidimensional optimization scenarios.",
+  },
+  {
+    id: 7,
+    title: "Crow search algorithm boosted by reinforcement learning for feature selection",
+    authors: ["Rodrigo Olivares", "Pablo Olivares", "Victor Rios", "Alejandro Oliveros"],
+    journal: "Machine Learning Methods in Systems",
+    year: 2024,
+    volume: "",
+    pages: "144–151",
+    doi: "10.1007/978-3-031-70595-3_15",
+    url: "http://dx.doi.org/10.1007/978-3-031-70595-3_15",
+    type: "conference",
+    keywords: ["crow search algorithm", "reinforcement learning", "feature selection", "machine learning"],
+    abstract:
+      "This work presents an enhanced Crow Search Algorithm boosted by reinforcement learning mechanisms for improved feature selection in machine learning applications. The research combines the intelligent foraging behavior of crows with adaptive learning strategies to optimize feature subset selection in high-dimensional datasets. The reinforcement learning component enables the algorithm to learn from the quality of previously selected feature subsets and adjust search strategies accordingly. The proposed method incorporates memory mechanisms and social learning behaviors that enhance the algorithm's ability to identify relevant features while avoiding redundant or irrelevant ones, resulting in improved classification performance and reduced computational complexity.",
+  },
+  {
+    id: 6,
+    title: "Orca Predator Algorithm for Feature Selection",
+    authors: ["Camilo Ravelo", "Sebastian M. Guzmán", "Rodrigo Olivares"],
+    journal: "Software Engineering Methods in Systems and Network Systems",
+    year: 2024,
+    volume: "",
+    pages: "26–34",
+    doi: "10.1007/978-3-031-53549-9_3",
+    url: "http://dx.doi.org/10.1007/978-3-031-53549-9_3",
+    type: "conference",
+    keywords: ["orca algorithm", "feature selection", "metaheuristics", "optimization"],
+    abstract:
+      "This research introduces the Orca Predator Algorithm as a novel metaheuristic approach for feature selection problems in machine learning and data mining applications. The algorithm is inspired by the sophisticated hunting strategies and social behaviors of orcas, incorporating their cooperative hunting techniques and intelligent prey selection mechanisms. The proposed method models the feature selection process as a predator-prey relationship, where features are evaluated based on their contribution to classification performance. The algorithm includes adaptive mechanisms for balancing exploration and exploitation, enabling efficient navigation through high-dimensional feature spaces while maintaining solution diversity and avoiding premature convergence.",
+  },
+  {
+    id: 5,
+    title: "On the max-min influence spread problem: A multi-objective optimization approach",
+    authors: ["Fabián Riquelme", "Francisco Muñoz", "Rodrigo Olivares"],
+    journal: "Applied Soft Computing",
+    year: 2024,
+    volume: "154",
+    pages: "111343",
+    doi: "https://doi.org/10.1016/j.asoc.2024.111343",
+    url: "https://www.sciencedirect.com/science/article/pii/S1568494624001170",
+    type: "article",
+    keywords: ["influence spread", "multi-objective optimization", "social networks", "algorithms"],
+    abstract:
+      "This study addresses the max-min influence spread problem in social networks through a comprehensive multi-objective optimization approach. The research focuses on maximizing the minimum influence spread across different network communities while considering multiple conflicting objectives such as coverage, fairness, and resource constraints. The proposed methodology incorporates advanced multi-objective evolutionary algorithms that can handle the complex trade-offs inherent in social network influence maximization. The approach considers network topology, user behavior patterns, and information diffusion dynamics to identify optimal seed sets that ensure equitable influence distribution across diverse network segments, with applications in viral marketing, information dissemination, and social awareness campaigns.",
+  },
+  {
+    id: 4,
+    title: "Dynamic Population on Bio-Inspired Algorithms Using Machine Learning for Global Optimization",
+    authors: [
+      "Nicolás Caselli",
+      "Ricardo Soto",
+      "Broderick Crawford",
+      "Sergio Valdivia",
+      "Elizabeth Chicata",
+      "Rodrigo Olivares",
+    ],
+    journal: "Biomimetics",
+    year: 2023,
+    volume: "9(1)",
+    pages: "7",
+    doi: "10.3390/biomimetics9010007",
+    url: "https://doi.org/10.3390/biomimetics9010007",
+    type: "article",
+    keywords: ["dynamic population", "bio-inspired algorithms", "machine learning", "global optimization"],
+    abstract:
+      "This research presents a novel approach to enhance bio-inspired algorithms through dynamic population management using machine learning techniques for global optimization problems. The study addresses the challenge of maintaining optimal population sizes throughout the optimization process by implementing adaptive mechanisms that adjust population parameters based on search progress and problem characteristics. The proposed methodology incorporates machine learning models that predict optimal population configurations and automatically adapt algorithm parameters to improve convergence speed and solution quality. The approach has been validated on various benchmark optimization problems, demonstrating significant improvements in performance compared to traditional static population approaches.",
+  },
+  {
+    id: 3,
+    title: "An Integral Cybersecurity Approach Using a Many-Objective Optimization Strategy",
+    authors: ["Omar Salinas", "Ricardo Soto", "Broderick Crawford", "Rodrigo Olivares"],
+    journal: "IEEE Access",
+    year: 2023,
+    volume: "11",
+    pages: "91913--91936",
+    doi: "10.1109/access.2023.3307492",
+    url: "https://doi.org/10.1109/access.2023.3307492",
+    type: "article",
+    keywords: ["cybersecurity", "many-objective optimization", "security strategy", "algorithms"],
+    abstract:
+      "This comprehensive study presents an integral cybersecurity approach leveraging many-objective optimization strategies to address the complex and multifaceted nature of modern cybersecurity challenges. The research develops a holistic framework that simultaneously optimizes multiple security objectives including threat detection accuracy, response time, resource utilization, cost-effectiveness, and system performance. The proposed methodology incorporates advanced many-objective evolutionary algorithms capable of handling the high-dimensional objective space characteristic of cybersecurity optimization problems. The approach considers various security layers, threat types, and organizational constraints to provide comprehensive security solutions that balance competing objectives while maintaining robust protection against evolving cyber threats.",
+  },
+  {
+    id: 2,
+    title: "A Learning-Based Particle Swarm Optimizer for Solving Mathematical Combinatorial Problems",
+    authors: [
+      "Rodrigo Olivares",
+      "Ricardo Soto",
+      "Broderick Crawford",
+      "Víctor Ríos",
+      "Pablo Olivares",
+      "Camilo Ravelo",
+      "Sebastian M. Guzmán",
+      "Diego Nauduan",
+    ],
+    journal: "Axioms",
+    year: 2023,
+    volume: "12(7)",
+    pages: "643",
+    doi: "10.3390/axioms12070643",
+    url: "https://doi.org/10.3390/axioms12070643",
+    type: "article",
+    keywords: ["particle swarm optimization", "combinatorial problems", "machine learning", "algorithms"],
+    abstract:
+      "This research introduces a learning-based enhancement to Particle Swarm Optimization specifically designed for solving complex mathematical combinatorial problems. The study addresses the limitations of traditional PSO when applied to discrete optimization spaces by incorporating adaptive learning mechanisms that enable particles to learn from successful search patterns and adjust their behavior accordingly. The proposed algorithm includes memory-based learning strategies, dynamic parameter adaptation, and intelligent exploration techniques that improve the algorithm's ability to navigate complex combinatorial landscapes. Extensive experimental validation on various NP-hard combinatorial problems demonstrates the effectiveness of the learning-based approach in achieving superior solution quality and convergence characteristics compared to conventional PSO variants.",
+  },
+  {
+    id: 1,
+    title:
+      "A depth-based heuristic to solve the multi-objective influence spread problem using particle swarm optimization",
+    authors: ["Fabián Riquelme", "Francisco Muñoz", "Rodrigo Olivares"],
+    journal: "OPSEARCH",
+    year: 2023,
+    volume: "60(3)",
+    pages: "1267–1285",
+    doi: "10.1007/s12597-023-00662-z",
+    url: "http://dx.doi.org/10.1007/s12597-023-00662-z",
+    type: "article",
+    keywords: ["influence spread", "multi-objective optimization", "particle swarm optimization", "social networks"],
+    abstract:
+      "This study presents a depth-based heuristic approach combined with particle swarm optimization to address the multi-objective influence spread problem in social networks. The research focuses on developing efficient algorithms that can identify influential nodes while optimizing multiple conflicting objectives such as influence coverage, propagation speed, and resource constraints. The proposed depth-based heuristic incorporates network structural properties and information diffusion patterns to guide the particle swarm optimization process toward promising regions of the solution space. The methodology considers the hierarchical nature of social networks and leverages depth-based metrics to evaluate node importance and influence potential, resulting in more effective seed selection strategies for viral marketing and information dissemination applications.",
+  },
+]
+
+// Collaborators data
+const collaborators = [
+  {
+    id: 1,
+    name: "Rodrigo Olivares",
+    role: "Principal Investigator",
+    affiliation: "Universidad de Valparaíso",
+    email: "rodrigo.olivares@uv.cl",
+    image: "/professional-researcher-portrait.png",
+    bio: "Dr. Rodrigo Olivares is a leading researcher in biomimetic algorithms and optimization techniques. His work focuses on applying nature-inspired computational methods to solve complex engineering and computer science problems. He has published extensively in top-tier journals and conferences, with particular expertise in particle swarm optimization, feature selection, and cybersecurity applications.",
+    expertise: ["Biomimetic Algorithms", "Optimization", "Machine Learning", "Cybersecurity"],
+    publications: 14,
+    hIndex: 12,
+  },
+  {
+    id: 2,
+    name: "Ricardo Soto",
+    role: "Co-Investigator",
+    affiliation: "Universidad de Valparaíso",
+    email: "ricardo.soto@uv.cl",
+    image: "/academic-professor-portrait.png",
+    bio: "Dr. Ricardo Soto is a distinguished professor and researcher specializing in constraint programming and metaheuristic algorithms. His research contributions span multiple domains including artificial intelligence, operations research, and computational optimization. He has been instrumental in developing novel approaches to combinatorial optimization problems.",
+    expertise: ["Constraint Programming", "Metaheuristics", "Artificial Intelligence", "Operations Research"],
+    publications: 150,
+    hIndex: 25,
+  },
+  {
+    id: 3,
+    name: "Broderick Crawford",
+    role: "Co-Investigator",
+    affiliation: "Universidad de Valparaíso",
+    email: "broderick.crawford@uv.cl",
+    image: "/computer-science-professor-portrait.png",
+    bio: "Dr. Broderick Crawford is a renowned expert in computational intelligence and software engineering. His research focuses on the intersection of artificial intelligence and software development, with significant contributions to evolutionary algorithms and their applications in real-world problems.",
+    expertise: ["Computational Intelligence", "Software Engineering", "Evolutionary Algorithms", "AI Applications"],
+    publications: 120,
+    hIndex: 22,
+  },
+  {
+    id: 4,
+    name: "Camilo Ravelo",
+    role: "Research Associate",
+    affiliation: "Universidad de Valparaíso",
+    email: "camilo.ravelo@uv.cl",
+    image: "/young-researcher-portrait.png",
+    bio: "Camilo Ravelo is a promising researcher specializing in nature-inspired algorithms and their applications to optimization problems. His work on the Orca Predator Algorithm has shown significant contributions to the field of metaheuristic optimization.",
+    expertise: ["Nature-inspired Algorithms", "Optimization", "Feature Selection", "Algorithm Design"],
+    publications: 8,
+    hIndex: 6,
+  },
+  {
+    id: 5,
+    name: "Sebastian M. Guzmán",
+    role: "Research Associate",
+    affiliation: "Universidad de Valparaíso",
+    email: "sebastian.guzman@uv.cl",
+    image: "/software-engineer-researcher-portrait.png",
+    bio: "Sebastian M. Guzmán is a dedicated researcher focusing on the application of machine learning and optimization techniques to software engineering problems. His work bridges the gap between theoretical algorithms and practical software solutions.",
+    expertise: ["Machine Learning", "Software Engineering", "Agile Methodologies", "Team Optimization"],
+    publications: 6,
+    hIndex: 4,
+  },
+  {
+    id: 6,
+    name: "Omar Salinas",
+    role: "Cybersecurity Specialist",
+    affiliation: "Universidad de Valparaíso",
+    email: "omar.salinas@uv.cl",
+    image: "/cybersecurity-expert-portrait.png",
+    bio: "Omar Salinas is a cybersecurity expert with extensive experience in applying optimization techniques to security operations. His research focuses on developing intelligent systems for threat detection and response in cybersecurity environments.",
+    expertise: ["Cybersecurity", "Threat Detection", "Security Operations", "Multi-objective Optimization"],
+    publications: 5,
+    hIndex: 3,
+  },
+]
+
+export default function HomePage() {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedYear, setSelectedYear] = useState<string>("all")
+  const [selectedType, setSelectedType] = useState<string>("all")
+  const [selectedKeyword, setSelectedKeyword] = useState<string>("all")
+  const [expandedAbstracts, setExpandedAbstracts] = useState<Set<number>>(new Set())
+  const [selectedCollaborator, setSelectedCollaborator] = useState<(typeof collaborators)[0] | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const articlesPerPage = 6
+
+  const years = [...new Set(papers.map((p) => p.year))].sort((a, b) => b - a)
+  const types = [...new Set(papers.map((p) => p.type))]
+  const allKeywords = [...new Set(papers.flatMap((p) => p.keywords))]
+
+  const filteredPapers = useMemo(() => {
+    return papers.filter((paper) => {
+      const matchesSearch =
+        searchTerm === "" ||
+        paper.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        paper.authors.some((author) => author.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        paper.keywords.some((keyword) => keyword.toLowerCase().includes(searchTerm.toLowerCase()))
+
+      const matchesYear = selectedYear === "all" || paper.year.toString() === selectedYear
+      const matchesType = selectedType === "all" || paper.type === selectedType
+      const matchesKeyword = selectedKeyword === "all" || paper.keywords.includes(selectedKeyword)
+
+      return matchesSearch && matchesYear && matchesType && matchesKeyword
+    })
+  }, [searchTerm, selectedYear, selectedType, selectedKeyword])
+
+  const totalPages = Math.ceil(filteredPapers.length / articlesPerPage)
+  const startIndex = (currentPage - 1) * articlesPerPage
+  const endIndex = startIndex + articlesPerPage
+  const currentPapers = filteredPapers.slice(startIndex, endIndex)
+
+  useMemo(() => {
+    setCurrentPage(1)
+  }, [searchTerm, selectedYear, selectedType, selectedKeyword])
+
+  const toggleAbstract = (paperId: number) => {
+    const newExpanded = new Set(expandedAbstracts)
+    if (newExpanded.has(paperId)) {
+      newExpanded.delete(paperId)
+    } else {
+      newExpanded.add(paperId)
+    }
+    setExpandedAbstracts(newExpanded)
+  }
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page)
+  }
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      goToPage(currentPage - 1)
+    }
+  }
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      goToPage(currentPage + 1)
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 py-16 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="flex justify-center items-center gap-8 mb-8">
+            <div className="flex items-center gap-2">
+              <img
+                src="https://uv.cl/images/descargas-corporativas/uv_logo_alta_rgba_azul-2023.png"
+                alt="Universidad de Valparaíso"
+                className="h-16 md:h-20 w-auto"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <img
+                src="https://investigacionypostgrado.fadeu.uc.cl/wp-content/uploads/2024/05/image-1024x533.png"
+                alt="FONDECYT"
+                className="h-16 md:h-20 w-auto"
+              />
+            </div>
+          </div>
+
+          <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 text-balance">
+            Using artificial learning behaviors to intelligently balance the convergence and search procedures on
+            bio-inspired optimization solvers
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-5xl mx-auto text-pretty leading-relaxed">
+            The project aims to advance the field of combinatorial optimization by integrating sophisticated machine
+            learning techniques with advanced metaheuristic algorithms. This integration seeks to create a dynamic
+            balance between exploration and exploitation strategies, enhancing the efficiency and effectiveness of
+            solving complex optimization problems. The project focuses on incorporating cutting-edge swarm intelligence
+            methods, alongside other established optimization algorithms, to navigate and optimize in multidimensional
+            solution spaces. This nuanced approach also includes mechanisms to reduce the exploration of unviable
+            regions, a response to critical insights gathered from prior evaluations and feedback on the project.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Badge variant="secondary" className="text-sm px-4 py-2">
+              <BookOpen className="w-4 h-4 mr-2" />
+              {papers.length} Research Papers
+            </Badge>
+            <Badge variant="outline" className="text-sm px-4 py-2">
+              <Calendar className="w-4 h-4 mr-2" />
+              2023-2024
+            </Badge>
+          </div>
+        </div>
+      </section>
+
+      {/* Search and Filters */}
+      <section className="py-8 px-4 border-b">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-4 items-center">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <Input
+                placeholder="Search papers, authors, or keywords..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <Select value={selectedYear} onValueChange={setSelectedYear}>
+                <SelectTrigger className="w-32">
+                  <SelectValue placeholder="Year" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Years</SelectItem>
+                  {years.map((year) => (
+                    <SelectItem key={year} value={year.toString()}>
+                      {year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Select value={selectedType} onValueChange={setSelectedType}>
+                <SelectTrigger className="w-36">
+                  <SelectValue placeholder="Type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Types</SelectItem>
+                  {types.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type === "article" ? "Journal Article" : "Conference Paper"}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Select value={selectedKeyword} onValueChange={setSelectedKeyword}>
+                <SelectTrigger className="w-40">
+                  <SelectValue placeholder="Keywords" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Keywords</SelectItem>
+                  {allKeywords.map((keyword) => (
+                    <SelectItem key={keyword} value={keyword}>
+                      {keyword}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Collaborators Section */}
+      <section className="py-12 px-4 bg-muted/20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Research Team</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Meet our dedicated team of researchers and collaborators working on cutting-edge optimization and machine
+              learning projects.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {collaborators.map((collaborator) => (
+              <div
+                key={collaborator.id}
+                className="group cursor-pointer"
+                onClick={() => setSelectedCollaborator(collaborator)}
+              >
+                <div className="relative overflow-hidden rounded-full aspect-square mb-4 group-hover:scale-105 transition-transform duration-300">
+                  <img
+                    src={collaborator.image || "/placeholder.svg"}
+                    alt={collaborator.name}
+                    className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
+                  />
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-white text-sm font-medium">Ver perfil</span>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">
+                    {collaborator.name}
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1">{collaborator.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Papers Grid */}
+      <section className="py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-2">Research Papers ({filteredPapers.length})</h2>
+            <p className="text-muted-foreground">
+              {searchTerm && `Showing results for "${searchTerm}"`}
+              {filteredPapers.length > 0 && (
+                <span className="ml-2">
+                  Página {currentPage} de {totalPages} ({startIndex + 1}-{Math.min(endIndex, filteredPapers.length)} de{" "}
+                  {filteredPapers.length} artículos)
+                </span>
+              )}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {currentPapers.map((paper) => {
+              const isExpanded = expandedAbstracts.has(paper.id)
+              const shouldTruncate = paper.abstract.length > 150
+              const displayAbstract =
+                isExpanded || !shouldTruncate ? paper.abstract : `${paper.abstract.substring(0, 150)}...`
+
+              return (
+                <Card key={paper.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <Badge variant={paper.type === "article" ? "default" : "secondary"} className="text-xs">
+                        {paper.type === "article" ? "Journal" : "Conference"}
+                      </Badge>
+                      <span className="text-sm text-muted-foreground">{paper.year}</span>
+                    </div>
+                    <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors">
+                      {paper.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      <Users className="w-3 h-3 inline mr-1" />
+                      {paper.authors.slice(0, 2).join(", ")}
+                      {paper.authors.length > 2 && ` +${paper.authors.length - 2} more`}
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="pt-0">
+                    <div className="space-y-3">
+                      <div className="text-sm text-muted-foreground">
+                        <p className={isExpanded ? "" : "line-clamp-3"}>{displayAbstract}</p>
+                        {shouldTruncate && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleAbstract(paper.id)}
+                            className="mt-2 p-0 h-auto text-primary hover:text-primary/80"
+                          >
+                            {isExpanded ? (
+                              <>
+                                Ver menos <ChevronUp className="w-3 h-3 ml-1" />
+                              </>
+                            ) : (
+                              <>
+                                Ver más <ChevronDown className="w-3 h-3 ml-1" />
+                              </>
+                            )}
+                          </Button>
+                        )}
+                      </div>
+
+                      <div className="text-sm text-muted-foreground">
+                        <strong>{paper.journal}</strong>
+                        {paper.volume && ` ${paper.volume}`}
+                        {paper.pages && `, pp. ${paper.pages}`}
+                      </div>
+
+                      <div className="flex flex-wrap gap-1">
+                        {paper.keywords.slice(0, 3).map((keyword) => (
+                          <Badge key={keyword} variant="outline" className="text-xs">
+                            {keyword}
+                          </Badge>
+                        ))}
+                        {paper.keywords.length > 3 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{paper.keywords.length - 3}
+                          </Badge>
+                        )}
+                      </div>
+
+                      <div className="flex gap-2 pt-2">
+                        <Button size="sm" variant="outline" className="flex-1 bg-transparent" asChild>
+                          <a href={paper.url} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="w-3 h-3 mr-1" />
+                            View
+                          </a>
+                        </Button>
+                        <Button size="sm" variant="ghost" className="px-3">
+                          <Download className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+
+          {filteredPapers.length > articlesPerPage && (
+            <div className="flex justify-center items-center gap-2 mt-8">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={goToPreviousPage}
+                disabled={currentPage === 1}
+                className="flex items-center gap-1 bg-transparent"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                Anterior
+              </Button>
+
+              <div className="flex gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <Button
+                    key={page}
+                    variant={currentPage === page ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => goToPage(page)}
+                    className="w-10"
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </div>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={goToNextPage}
+                disabled={currentPage === totalPages}
+                className="flex items-center gap-1 bg-transparent"
+              >
+                Siguiente
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+
+          {filteredPapers.length === 0 && (
+            <div className="text-center py-12">
+              <div className="text-muted-foreground mb-4">
+                <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                <p className="text-lg">No papers found</p>
+                <p className="text-sm">Try adjusting your search criteria</p>
+              </div>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchTerm("")
+                  setSelectedYear("all")
+                  setSelectedType("all")
+                  setSelectedKeyword("all")
+                }}
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Collaborator Modal */}
+      <Dialog open={!!selectedCollaborator} onOpenChange={() => setSelectedCollaborator(null)}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          {selectedCollaborator && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl">{selectedCollaborator.name}</DialogTitle>
+              </DialogHeader>
+
+              <div className="space-y-6">
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <img
+                      src={selectedCollaborator.image || "/placeholder.svg"}
+                      alt={selectedCollaborator.name}
+                      className="w-32 h-32 rounded-full object-cover mx-auto md:mx-0"
+                    />
+                  </div>
+
+                  <div className="flex-1 space-y-4">
+                    <div>
+                      <h3 className="text-lg font-semibold text-primary">{selectedCollaborator.role}</h3>
+                      <p className="text-muted-foreground">{selectedCollaborator.affiliation}</p>
+                      <p className="text-sm text-muted-foreground">{selectedCollaborator.email}</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="text-center p-3 bg-muted/50 rounded-lg">
+                        <div className="text-2xl font-bold text-primary">{selectedCollaborator.publications}</div>
+                        <div className="text-sm text-muted-foreground">Publications</div>
+                      </div>
+                      <div className="text-center p-3 bg-muted/50 rounded-lg">
+                        <div className="text-2xl font-bold text-primary">{selectedCollaborator.hIndex}</div>
+                        <div className="text-sm text-muted-foreground">H-Index</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">Biography</h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{selectedCollaborator.bio}</p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-3">Areas of Expertise</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedCollaborator.expertise.map((area) => (
+                      <Badge key={area} variant="secondary" className="text-xs">
+                        {area}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Footer */}
+      <footer className="bg-muted/30 py-8 px-4 mt-16">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="flex justify-center items-center gap-6 mb-4">
+            <img
+              src="https://uv.cl/images/descargas-corporativas/uv_logo_alta_rgba_azul-2023.png"
+              alt="Universidad de Valparaíso"
+              className="h-10 w-auto opacity-70"
+            />
+            <img
+              src="https://investigacionypostgrado.fadeu.uc.cl/wp-content/uploads/2024/05/image-1024x533.png"
+              alt="FONDECYT"
+              className="h-10 w-auto opacity-70"
+            />
+          </div>
+          <p className="text-muted-foreground">
+            © 2024 Academic Research Showcase. Featuring research by Rodrigo Olivares and collaborators.
+          </p>
+        </div>
+      </footer>
+    </div>
+  )
+}
