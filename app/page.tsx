@@ -545,8 +545,8 @@ export default function HomePage() {
               {searchTerm && `Showing results for "${searchTerm}"`}
               {filteredPapers.length > 0 && (
                 <span className="ml-2">
-                  Página {currentPage} de {totalPages} ({startIndex + 1}-{Math.min(endIndex, filteredPapers.length)} de{" "}
-                  {filteredPapers.length} artículos)
+                  Page {currentPage} of {totalPages} ({startIndex + 1}-{Math.min(endIndex, filteredPapers.length)} of{" "}
+                  {filteredPapers.length} articles)
                 </span>
               )}
             </p>
@@ -654,7 +654,7 @@ export default function HomePage() {
                 className="flex items-center gap-1 bg-transparent"
               >
                 <ChevronLeft className="w-4 h-4" />
-                Anterior
+                Previous
               </Button>
 
               <div className="flex gap-1">
@@ -678,7 +678,7 @@ export default function HomePage() {
                 disabled={currentPage === totalPages}
                 className="flex items-center gap-1 bg-transparent"
               >
-                Siguiente
+                Next
                 <ChevronRight className="w-4 h-4" />
               </Button>
             </div>
