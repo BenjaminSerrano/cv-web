@@ -495,7 +495,7 @@ export default function HomePage() {
               className="group cursor-pointer text-center"
               onClick={() => setSelectedCollaborator(principalInvestigator)}
             >
-              <div className="relative overflow-hidden rounded-full w-28 h-28 mx-auto mb-4 group-hover:scale-105 transition-transform duration-300">
+              <div className="relative overflow-hidden rounded-full w-40 h-40 mx-auto mb-4 group-hover:scale-105 transition-transform duration-300">
                 <img
                   src={principalInvestigator.image || "/placeholder.svg"}
                   alt={principalInvestigator.name}
