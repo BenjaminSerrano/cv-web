@@ -41,176 +41,182 @@ interface ParsedPaper {
 }
 
 // Collaborators data
-const collaborators = [
+const principalInvestigator = {
+  id: 0,
+  name: "Rodrigo Olivares",
+  role: "Principal Investigator",
+  affiliation: "Universidad de Valparaíso",
+  email: "rodrigo.olivares@uv.cl",
+  image: "/professional-researcher-portrait.png",
+  bio: "Dr. Rodrigo Olivares is a leading researcher in biomimetic algorithms and optimization techniques. His work focuses on applying nature-inspired computational methods to solve complex engineering and computer science problems. He has published extensively in top-tier journals and conferences, with particular expertise in particle swarm optimization, feature selection, and cybersecurity applications.",
+  expertise: ["Biomimetic Algorithms", "Optimization", "Machine Learning", "Cybersecurity"],
+  publications: 50,
+  hIndex: 15,
+}
+
+const collaboratorGroups = [
   {
-    id: 1,
-    name: "Rodrigo Olivares",
-    role: "Principal Investigator",
-    affiliation: "Universidad de Valparaíso",
-    email: "rodrigo.olivares@uv.cl",
-    image: "/professional-researcher-portrait.png",
-    bio: "Dr. Rodrigo Olivares is a leading researcher in biomimetic algorithms and optimization techniques. His work focuses on applying nature-inspired computational methods to solve complex engineering and computer science problems. He has published extensively in top-tier journals and conferences, with particular expertise in particle swarm optimization, feature selection, and cybersecurity applications.",
-    expertise: ["Biomimetic Algorithms", "Optimization", "Machine Learning", "Cybersecurity"],
-    publications: 50,
-    hIndex: 15,
+    category: "Colaboradores",
+    members: [
+      {
+        id: 1,
+        name: "Broderick Crawford",
+        role: "Colaborador",
+        affiliation: "Universidad de Valparaíso",
+        email: "broderick.crawford@uv.cl",
+        image: "/computer-science-professor-portrait.png",
+        bio: "Dr. Broderick Crawford is a renowned expert in computational intelligence and software engineering. His research focuses on the intersection of artificial intelligence and software development, with significant contributions to evolutionary algorithms and their applications in real-world problems.",
+        expertise: ["Computational Intelligence", "Software Engineering", "Evolutionary Algorithms", "AI Applications"],
+        publications: 120,
+        hIndex: 22,
+      },
+      {
+        id: 2,
+        name: "Roberto Muñoz",
+        role: "Colaborador",
+        affiliation: "Universidad de Valparaíso",
+        email: "roberto.munoz@uv.cl",
+        image: "/placeholder-user.jpg",
+        bio: "Dr. Roberto Muñoz is a senior researcher with extensive experience in computational intelligence and optimization techniques. His research focuses on developing advanced algorithms for complex problem-solving scenarios, with particular expertise in evolutionary computation and hybrid optimization approaches.",
+        expertise: ["Computational Intelligence", "Evolutionary Computation", "Hybrid Optimization", "Complex Systems"],
+        publications: 85,
+        hIndex: 18,
+      },
+      {
+        id: 3,
+        name: "Fabian Riquelme",
+        role: "Colaborador",
+        affiliation: "Universidad de Valparaíso",
+        email: "fabian.riquelme@uv.cl",
+        image: "/academic-professor-portrait.png",
+        bio: "Dr. Fabian Riquelme specializes in social network analysis and multi-objective optimization. His research focuses on influence maximization problems and the application of swarm intelligence methods to complex social networks.",
+        expertise: ["Social Network Analysis", "Multi-objective Optimization", "Influence Maximization", "Swarm Intelligence"],
+        publications: 25,
+        hIndex: 12,
+      },
+      {
+        id: 4,
+        name: "Ricardo Soto",
+        role: "Colaborador",
+        affiliation: "Universidad de Valparaíso",
+        email: "ricardo.soto@uv.cl",
+        image: "/academic-professor-portrait.png",
+        bio: "Dr. Ricardo Soto is a distinguished professor and researcher specializing in constraint programming and metaheuristic algorithms. His research contributions span multiple domains including artificial intelligence, operations research, and computational optimization.",
+        expertise: ["Constraint Programming", "Metaheuristics", "Artificial Intelligence", "Operations Research"],
+        publications: 150,
+        hIndex: 25,
+      },
+    ],
   },
   {
-    id: 2,
-    name: "Fabian Riquelme",
-    role: "Research Scientist",
-    affiliation: "Universidad de Valparaíso",
-    email: "fabian.riquelme@uv.cl",
-    image: "/academic-professor-portrait.png",
-    bio: "Dr. Fabian Riquelme specializes in social network analysis and multi-objective optimization. His research focuses on influence maximization problems and the application of swarm intelligence methods to complex social networks. He has made significant contributions to understanding information diffusion and viral marketing strategies.",
-    expertise: ["Social Network Analysis", "Multi-objective Optimization", "Influence Maximization", "Swarm Intelligence"],
-    publications: 25,
-    hIndex: 12,
+    category: "PhD. Students",
+    members: [
+      {
+        id: 5,
+        name: "Emilio Flores",
+        role: "PhD. Student",
+        affiliation: "Universidad de Valparaíso",
+        email: "emilio.flores@uv.cl",
+        image: "/placeholder-user.jpg",
+        bio: "Emilio Flores is a PhD student specializing in applied mathematics and optimization theory. His work contributes to the theoretical foundations of metaheuristic algorithms and their practical applications.",
+        expertise: ["Applied Mathematics", "Optimization Theory", "Metaheuristic Theory", "Mathematical Modeling"],
+        publications: 62,
+        hIndex: 14,
+      },
+      {
+        id: 6,
+        name: "Pablo Olivares",
+        role: "PhD. Student",
+        affiliation: "Universidad de Valparaíso",
+        email: "pablo.olivares@uv.cl",
+        image: "/young-researcher-portrait.png",
+        bio: "Pablo Olivares is a PhD student working on reinforcement learning applications in optimization algorithms. His research focuses on enhancing particle swarm optimization and other metaheuristics through intelligent learning mechanisms.",
+        expertise: ["Reinforcement Learning", "Particle Swarm Optimization", "Learning-based Optimization", "Algorithm Enhancement"],
+        publications: 14,
+        hIndex: 6,
+      },
+      {
+        id: 7,
+        name: "Víctor Ríos",
+        role: "PhD. Student",
+        affiliation: "Universidad de Valparaíso",
+        email: "victor.rios@uv.cl",
+        image: "/computer-science-professor-portrait.png",
+        bio: "Víctor Ríos specializes in developing and implementing advanced optimization algorithms. His work includes search space reduction techniques, feature selection methods, and novel approaches to solving complex optimization problems.",
+        expertise: ["Algorithm Development", "Search Space Reduction", "Feature Selection", "Optimization Techniques"],
+        publications: 16,
+        hIndex: 8,
+      },
+      {
+        id: 8,
+        name: "Omar Salinas",
+        role: "PhD. Student",
+        affiliation: "Universidad de Valparaíso",
+        email: "omar.salinas@uv.cl",
+        image: "/cybersecurity-expert-portrait.png",
+        bio: "Omar Salinas is a PhD student with extensive experience in applying optimization techniques to security operations. His research focuses on developing intelligent systems for threat detection and response in cybersecurity environments.",
+        expertise: ["Cybersecurity", "Threat Detection", "Security Operations", "Many-objective Optimization"],
+        publications: 15,
+        hIndex: 8,
+      },
+      {
+        id: 9,
+        name: "Benjamín Serrano",
+        role: "PhD. Student",
+        affiliation: "Universidad de Valparaíso",
+        email: "benjamin.serrano@uv.cl",
+        image: "/young-researcher-portrait.png",
+        bio: "Benjamín Serrano is a PhD student contributing to various optimization projects. His work includes research on particle swarm optimization, feature selection algorithms, and search space optimization techniques.",
+        expertise: ["Optimization", "Algorithm Testing", "Feature Selection", "Data Analysis"],
+        publications: 8,
+        hIndex: 4,
+      },
+    ],
   },
   {
-    id: 3,
-    name: "Broderick Crawford",
-    role: "Co-Investigator",
-    affiliation: "Universidad de Valparaíso",
-    email: "broderick.crawford@uv.cl",
-    image: "/computer-science-professor-portrait.png",
-    bio: "Dr. Broderick Crawford is a renowned expert in computational intelligence and software engineering. His research focuses on the intersection of artificial intelligence and software development, with significant contributions to evolutionary algorithms and their applications in real-world problems.",
-    expertise: ["Computational Intelligence", "Software Engineering", "Evolutionary Algorithms", "AI Applications"],
-    publications: 120,
-    hIndex: 22,
-  },
-  {
-    id: 4,
-    name: "Ricardo Soto",
-    role: "Co-Investigator",
-    affiliation: "Universidad de Valparaíso",
-    email: "ricardo.soto@uv.cl",
-    image: "/academic-professor-portrait.png",
-    bio: "Dr. Ricardo Soto is a distinguished professor and researcher specializing in constraint programming and metaheuristic algorithms. His research contributions span multiple domains including artificial intelligence, operations research, and computational optimization. He has been instrumental in developing novel approaches to combinatorial optimization problems.",
-    expertise: ["Constraint Programming", "Metaheuristics", "Artificial Intelligence", "Operations Research"],
-    publications: 150,
-    hIndex: 25,
-  },
-  {
-    id: 5,
-    name: "Omar Salinas",
-    role: "Cybersecurity Specialist",
-    affiliation: "Universidad de Valparaíso",
-    email: "omar.salinas@uv.cl",
-    image: "/cybersecurity-expert-portrait.png",
-    bio: "Omar Salinas is a cybersecurity expert with extensive experience in applying optimization techniques to security operations. His research focuses on developing intelligent systems for threat detection and response in cybersecurity environments using many-objective optimization strategies.",
-    expertise: ["Cybersecurity", "Threat Detection", "Security Operations", "Many-objective Optimization"],
-    publications: 15,
-    hIndex: 8,
-  },
-  {
-    id: 6,
-    name: "Camilo Ravelo",
-    role: "Research Associate",
-    affiliation: "Universidad de Valparaíso",
-    email: "camilo.ravelo@uv.cl",
-    image: "/young-researcher-portrait.png",
-    bio: "Camilo Ravelo is a promising researcher specializing in nature-inspired algorithms and their applications to optimization problems. His work on the Orca Predator Algorithm has shown significant contributions to the field of metaheuristic optimization and feature selection.",
-    expertise: ["Nature-inspired Algorithms", "Orca Algorithm", "Feature Selection", "Algorithm Design"],
-    publications: 18,
-    hIndex: 9,
-  },
-  {
-    id: 7,
-    name: "Nicolas Caselli",
-    role: "Machine Learning Researcher",
-    affiliation: "Universidad de Valparaíso",
-    email: "nicolas.caselli@uv.cl",
-    image: "/software-engineer-researcher-portrait.png",
-    bio: "Nicolas Caselli focuses on machine learning applications in bio-inspired algorithms. His research involves developing self-adaptive mechanisms and dynamic population management techniques for global optimization problems using advanced machine learning models.",
-    expertise: ["Machine Learning", "Self-adaptive Algorithms", "Dynamic Population", "Global Optimization"],
-    publications: 12,
-    hIndex: 7,
-  },
-  {
-    id: 8,
-    name: "Sergio Valdivia",
-    role: "Optimization Researcher",
-    affiliation: "Universidad de Valparaíso",
-    email: "sergio.valdivia@uv.cl",
-    image: "/academic-professor-portrait.png",
-    bio: "Sergio Valdivia specializes in clustering-based optimization methods and combinatorial problem solving. His work focuses on developing novel binarization methods for metaheuristic algorithms applied to 0/1 combinatorial problems.",
-    expertise: ["Clustering Methods", "Combinatorial Optimization", "Binarization Techniques", "Metaheuristics"],
-    publications: 20,
-    hIndex: 10,
-  },
-  {
-    id: 9,
-    name: "Pablo Olivares",
-    role: "Research Associate",
-    affiliation: "Universidad de Valparaíso",
-    email: "pablo.olivares@uv.cl",
-    image: "/young-researcher-portrait.png",
-    bio: "Pablo Olivares is a research associate working on reinforcement learning applications in optimization algorithms. His research focuses on enhancing particle swarm optimization and other metaheuristics through intelligent learning mechanisms.",
-    expertise: ["Reinforcement Learning", "Particle Swarm Optimization", "Learning-based Optimization", "Algorithm Enhancement"],
-    publications: 14,
-    hIndex: 6,
-  },
-  {
-    id: 10,
-    name: "Victor Rios",
-    role: "Algorithm Developer",
-    affiliation: "Universidad de Valparaíso",
-    email: "victor.rios@uv.cl",
-    image: "/computer-science-professor-portrait.png",
-    bio: "Victor Rios specializes in developing and implementing advanced optimization algorithms. His work includes search space reduction techniques, feature selection methods, and novel approaches to solving complex optimization problems.",
-    expertise: ["Algorithm Development", "Search Space Reduction", "Feature Selection", "Optimization Techniques"],
-    publications: 16,
-    hIndex: 8,
-  },
-  {
-    id: 11,
-    name: "Sebastian Guzman",
-    role: "Software Engineering Researcher",
-    affiliation: "Universidad de Valparaíso",
-    email: "sebastian.guzman@uv.cl",
-    image: "/software-engineer-researcher-portrait.png",
-    bio: "Sebastian Guzman bridges the gap between optimization algorithms and software engineering practices. His research focuses on applying machine learning and optimization techniques to agile methodologies and team optimization in software development.",
-    expertise: ["Software Engineering", "Agile Methodologies", "Team Optimization", "Machine Learning Applications"],
-    publications: 10,
-    hIndex: 5,
-  },
-  {
-    id: 12,
-    name: "Benjamin Serrano",
-    role: "Junior Researcher",
-    affiliation: "Universidad de Valparaíso",
-    email: "benjamin.serrano@uv.cl",
-    image: "/young-researcher-portrait.png",
-    bio: "Benjamin Serrano is a junior researcher contributing to various optimization projects. His work includes supporting research on particle swarm optimization, feature selection algorithms, and search space optimization techniques for complex problem solving.",
-    expertise: ["Optimization Support", "Algorithm Testing", "Research Assistance", "Data Analysis"],
-    publications: 8,
-    hIndex: 4,
-  },
-  {
-    id: 13,
-    name: "Roberto Muñoz",
-    role: "Senior Researcher",
-    affiliation: "Universidad de Valparaíso",
-    email: "roberto.munoz@uv.cl",
-    image: "/senior-researcher-portrait.png",
-    bio: "Dr. Roberto Muñoz is a senior researcher with extensive experience in computational intelligence and optimization techniques. His research focuses on developing advanced algorithms for complex problem-solving scenarios, with particular expertise in evolutionary computation and hybrid optimization approaches.",
-    expertise: ["Computational Intelligence", "Evolutionary Computation", "Hybrid Optimization", "Complex Systems"],
-    publications: 85,
-    hIndex: 18,
-  },
-  {
-    id: 14,
-    name: "Emilio Flores",
-    role: "Research Scientist",
-    affiliation: "Universidad de Valparaíso",
-    email: "emilio.flores@uv.cl",
-    image: "/research-scientist-portrait.png",
-    bio: "Dr. Emilio Flores is a research scientist specializing in applied mathematics and optimization theory. His work contributes significantly to the theoretical foundations of metaheuristic algorithms and their practical applications in engineering and computer science domains.",
-    expertise: ["Applied Mathematics", "Optimization Theory", "Metaheuristic Theory", "Mathematical Modeling"],
-    publications: 62,
-    hIndex: 14,
+    category: "Msc. Students",
+    members: [
+      {
+        id: 10,
+        name: "Sandy Iturra",
+        role: "Msc. Student",
+        affiliation: "Universidad de Valparaíso",
+        email: "",
+        image: "/placeholder-user.jpg",
+        bio: "Sandy Iturra is a Master's student contributing to research in bio-inspired optimization and machine learning techniques.",
+        expertise: ["Optimization", "Machine Learning", "Research"],
+        publications: 0,
+        hIndex: 0,
+      },
+      {
+        id: 11,
+        name: "Sebastián M. Guzmán",
+        role: "Msc. Student",
+        affiliation: "Universidad de Valparaíso",
+        email: "sebastian.guzman@uv.cl",
+        image: "/software-engineer-researcher-portrait.png",
+        bio: "Sebastián Guzmán bridges the gap between optimization algorithms and software engineering practices. His research focuses on applying machine learning and optimization techniques to agile methodologies.",
+        expertise: ["Software Engineering", "Agile Methodologies", "Team Optimization", "Machine Learning Applications"],
+        publications: 10,
+        hIndex: 5,
+      },
+      {
+        id: 12,
+        name: "Camilo Ravelo",
+        role: "Msc. Student",
+        affiliation: "Universidad de Valparaíso",
+        email: "camilo.ravelo@uv.cl",
+        image: "/young-researcher-portrait.png",
+        bio: "Camilo Ravelo is a Master's student specializing in nature-inspired algorithms and their applications to optimization problems. His work on the Orca Predator Algorithm has shown significant contributions to metaheuristic optimization.",
+        expertise: ["Nature-inspired Algorithms", "Orca Algorithm", "Feature Selection", "Algorithm Design"],
+        publications: 18,
+        hIndex: 9,
+      },
+    ],
   },
 ]
+
+const collaborators = [principalInvestigator, ...collaboratorGroups.flatMap(g => g.members)]
 
 function generateAbstract(paper: ParsedPaper): string {
   const templates = {
@@ -255,16 +261,7 @@ export default function HomePage() {
   const [expandedAbstracts, setExpandedAbstracts] = useState<Set<string>>(new Set())
   const [selectedCollaborator, setSelectedCollaborator] = useState<(typeof collaborators)[0] | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
-  const [teamCurrentPage, setTeamCurrentPage] = useState(0)
   const articlesPerPage = 6
-  const membersPerPage = 5
-
-  // Team pagination computed values
-  const totalTeamPages = Math.ceil(collaborators.length / membersPerPage)
-  const currentTeamMembers = collaborators.slice(
-    teamCurrentPage * membersPerPage,
-    (teamCurrentPage + 1) * membersPerPage
-  )
 
   useEffect(() => {
     const loadPapers = async () => {
@@ -462,74 +459,66 @@ export default function HomePage() {
       <section className="py-12 px-4 bg-muted/20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Research Team</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Equipo de Investigación</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Meet our dedicated team of researchers and collaborators working on cutting-edge optimization and machine
-              learning projects.
+              Conoce a nuestro equipo de investigadores y colaboradores trabajando en proyectos de optimización y
+              machine learning.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-            {currentTeamMembers.map((collaborator) => (
-              <div
-                key={collaborator.id}
-                className="group cursor-pointer"
-                onClick={() => setSelectedCollaborator(collaborator)}
-              >
-                <div className="relative overflow-hidden rounded-full aspect-square mb-4 group-hover:scale-105 transition-transform duration-300">
-                  <img
-                    src={collaborator.image || "/placeholder.svg"}
-                    alt={collaborator.name}
-                    className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
-                  />
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-white text-sm font-medium">Ver perfil</span>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">
-                    {collaborator.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-1">{collaborator.role}</p>
+          {/* Principal Investigator */}
+          <div className="flex justify-center mb-10">
+            <div
+              className="group cursor-pointer text-center"
+              onClick={() => setSelectedCollaborator(principalInvestigator)}
+            >
+              <div className="relative overflow-hidden rounded-full w-28 h-28 mx-auto mb-4 group-hover:scale-105 transition-transform duration-300">
+                <img
+                  src={principalInvestigator.image || "/placeholder.svg"}
+                  alt={principalInvestigator.name}
+                  className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
+                />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span className="text-white text-xs font-medium">Ver perfil</span>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Navigation Controls */}
-          <div className="flex justify-center items-center space-x-4">
-            <button
-              onClick={() => setTeamCurrentPage(teamCurrentPage - 1)}
-              disabled={teamCurrentPage === 0}
-              className="px-4 py-2 rounded-lg border border-border bg-background hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              ← Anterior
-            </button>
-            
-            <div className="flex space-x-2">
-              {Array.from({ length: totalTeamPages }, (_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setTeamCurrentPage(i)}
-                  className={`w-8 h-8 rounded-full transition-colors ${
-                    teamCurrentPage === i
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-background border border-border hover:bg-muted'
-                  }`}
-                >
-                  {i + 1}
-                </button>
-              ))}
+              <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">{principalInvestigator.name}</h3>
+              <p className="text-xs text-muted-foreground mt-1">{principalInvestigator.role}</p>
             </div>
-
-            <button
-              onClick={() => setTeamCurrentPage(teamCurrentPage + 1)}
-              disabled={teamCurrentPage >= totalTeamPages - 1}
-              className="px-4 py-2 rounded-lg border border-border bg-background hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Siguiente →
-            </button>
           </div>
+
+          {/* Category Groups */}
+          {collaboratorGroups.map((group) => (
+            <div key={group.category} className="mb-10">
+              <h3 className="text-xl font-semibold text-foreground mb-6 border-b pb-2">{group.category}</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                {group.members.map((collaborator) => (
+                  <div
+                    key={collaborator.id}
+                    className="group cursor-pointer"
+                    onClick={() => setSelectedCollaborator(collaborator)}
+                  >
+                    <div className="relative overflow-hidden rounded-full aspect-square mb-4 group-hover:scale-105 transition-transform duration-300">
+                      <img
+                        src={collaborator.image || "/placeholder.svg"}
+                        alt={collaborator.name}
+                        className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
+                      />
+                      <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span className="text-white text-xs font-medium">Ver perfil</span>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">
+                        {collaborator.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-1">{collaborator.role}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
