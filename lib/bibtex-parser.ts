@@ -284,12 +284,16 @@ export async function loadBibTeXFiles(): Promise<ParsedPaper[]> {
   const papers: ParsedPaper[] = [];
 
   try {
-    // Load fondecyt keys first to tag papers later
-    const fondecytKeys = new Set<string>();
+    // Load fondecyt titles first to tag papers later
+    const fondecytTitles = new Set<string>();
     const refsResponse = await fetch('/refs.bib');
     if (refsResponse.ok) {
       const refsContent = await refsResponse.text();
-      parseBibTeX(refsContent).forEach(entry => fondecytKeys.add(entry.key.trim()));
+      parseBibTeX(refsContent).forEach(entry => {
+        if (entry.fields.title) {
+          fondecytTitles.add(cleanFieldValue(entry.fields.title).toLowerCase().trim());
+        }
+      });
     }
 
     // Load conference papers
@@ -299,7 +303,7 @@ export async function loadBibTeXFiles(): Promise<ParsedPaper[]> {
       confEntries.forEach((entry, index) => {
         const paper = bibEntryToPaper(entry, `conf_${entry.key || index}`);
         if (paper) {
-          paper.isFondecyt = fondecytKeys.has(entry.key.trim());
+          paper.isFondecyt = fondecytTitles.has(paper.title.toLowerCase().trim());
           papers.push(paper);
         }
       });
@@ -312,7 +316,7 @@ export async function loadBibTeXFiles(): Promise<ParsedPaper[]> {
       jourEntries.forEach((entry, index) => {
         const paper = bibEntryToPaper(entry, `jour_${entry.key || index}`);
         if (paper) {
-          paper.isFondecyt = fondecytKeys.has(entry.key.trim());
+          paper.isFondecyt = fondecytTitles.has(paper.title.toLowerCase().trim());
           papers.push(paper);
         }
       });

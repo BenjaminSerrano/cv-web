@@ -39,6 +39,7 @@ interface ParsedPaper {
   publisher?: string;
   booktitle?: string;
   month?: string;
+  isFondecyt?: boolean;
 }
 
 // Collaborators data
@@ -263,6 +264,7 @@ export default function HomePage() {
   const [selectedCollaborator, setSelectedCollaborator] = useState<(typeof collaborators)[0] | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const [showOnlyFondecyt, setShowOnlyFondecyt] = useState(false)
+  const [showTeam, setShowTeam] = useState(false)
   const articlesPerPage = 6
 
   useEffect(() => {
@@ -470,16 +472,23 @@ export default function HomePage() {
       </section>
 
       {/* Collaborators Section */}
-      <section className="py-12 px-4 bg-muted/20">
+      <section className="py-8 px-4 bg-muted/20">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Equipo de Investigación</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Conoce a nuestro equipo de investigadores y colaboradores trabajando en proyectos de optimización y
-              machine learning.
-            </p>
-          </div>
+          <button
+            onClick={() => setShowTeam(!showTeam)}
+            className="w-full flex items-center justify-between text-left mb-4"
+          >
+            <div>
+              <h2 className="text-3xl font-bold text-foreground">Research Team</h2>
+              <p className="text-muted-foreground text-sm mt-1">
+                {showTeam ? "Click to collapse" : "Click to expand"}
+              </p>
+            </div>
+            <ChevronDown className={`w-6 h-6 text-muted-foreground transition-transform duration-200 ${showTeam ? "rotate-180" : ""}`} />
+          </button>
 
+          {showTeam && (
+          <>
           {/* Principal Investigator */}
           <div className="flex justify-center mb-10">
             <div
@@ -533,6 +542,8 @@ export default function HomePage() {
               </div>
             </div>
           ))}
+          </>
+          )}
         </div>
       </section>
 
