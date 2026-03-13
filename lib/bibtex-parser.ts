@@ -20,6 +20,7 @@ interface ParsedPaper {
   publisher?: string;
   booktitle?: string;
   month?: string;
+  isFondecyt?: boolean;
 }
 
 export function parseBibTeX(bibTexContent: string): BibTeXEntry[] {
@@ -281,64 +282,45 @@ export function bibEntryToPaper(entry: BibTeXEntry, id: string): ParsedPaper | n
 
 export async function loadBibTeXFiles(): Promise<ParsedPaper[]> {
   const papers: ParsedPaper[] = [];
-  
+
   try {
+    // Load fondecyt keys first to tag papers later
+    const fondecytKeys = new Set<string>();
+    const refsResponse = await fetch('/refs.bib');
+    if (refsResponse.ok) {
+      const refsContent = await refsResponse.text();
+      parseBibTeX(refsContent).forEach(entry => fondecytKeys.add(entry.key.trim()));
+    }
+
     // Load conference papers
-    console.log('Loading conference papers...');
     const confResponse = await fetch('/refsConf.bib');
-    if (!confResponse.ok) {
-      console.error('Failed to load refsConf.bib:', confResponse.status);
-    } else {
-      const confContent = await confResponse.text();
-      console.log('Conference BibTeX content length:', confContent.length);
-      
-      // Debug: show first 500 chars
-      console.log('Conference content preview:', confContent.substring(0, 500));
-      
-      const confEntries = parseBibTeX(confContent);
-      console.log('Parsed conference entries:', confEntries.length);
-      
+    if (confResponse.ok) {
+      const confEntries = parseBibTeX(await confResponse.text());
       confEntries.forEach((entry, index) => {
-        console.log(`Processing conference entry ${index + 1}:`, entry.key, entry.fields.title);
         const paper = bibEntryToPaper(entry, `conf_${entry.key || index}`);
         if (paper) {
-          console.log('✓ Added conference paper:', paper.title);
+          paper.isFondecyt = fondecytKeys.has(entry.key.trim());
           papers.push(paper);
-        } else {
-          console.log('✗ Failed to process conference entry:', entry.key);
         }
       });
     }
-    
+
     // Load journal articles
-    console.log('Loading journal articles...');
     const jourResponse = await fetch('/refsJour.bib');
-    if (!jourResponse.ok) {
-      console.error('Failed to load refsJour.bib:', jourResponse.status);
-    } else {
-      const jourContent = await jourResponse.text();
-      console.log('Journal BibTeX content length:', jourContent.length);
-      
-      const jourEntries = parseBibTeX(jourContent);
-      console.log('Parsed journal entries:', jourEntries.length);
-      
+    if (jourResponse.ok) {
+      const jourEntries = parseBibTeX(await jourResponse.text());
       jourEntries.forEach((entry, index) => {
-        console.log(`Processing journal entry ${index + 1}:`, entry.key, entry.fields.title);
         const paper = bibEntryToPaper(entry, `jour_${entry.key || index}`);
         if (paper) {
-          console.log('✓ Added journal paper:', paper.title);
+          paper.isFondecyt = fondecytKeys.has(entry.key.trim());
           papers.push(paper);
-        } else {
-          console.log('✗ Failed to process journal entry:', entry.key);
         }
       });
     }
-    
-    console.log('Total papers loaded:', papers.length);
-    
+
     // Sort by year (newest first)
     return papers.sort((a, b) => b.year - a.year);
-    
+
   } catch (error) {
     console.error('Error loading BibTeX files:', error);
     return [];

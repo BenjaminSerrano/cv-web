@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Loader2,
+  Filter,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -261,6 +262,7 @@ export default function HomePage() {
   const [expandedAbstracts, setExpandedAbstracts] = useState<Set<string>>(new Set())
   const [selectedCollaborator, setSelectedCollaborator] = useState<(typeof collaborators)[0] | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
+  const [showOnlyFondecyt, setShowOnlyFondecyt] = useState(false)
   const articlesPerPage = 6
 
   useEffect(() => {
@@ -294,10 +296,11 @@ export default function HomePage() {
       const matchesYear = selectedYear === "all" || paper.year.toString() === selectedYear
       const matchesType = selectedType === "all" || paper.type === selectedType
       const matchesKeyword = selectedKeyword === "all" || paper.keywords.includes(selectedKeyword)
+      const matchesFondecyt = !showOnlyFondecyt || paper.isFondecyt
 
-      return matchesSearch && matchesYear && matchesType && matchesKeyword
+      return matchesSearch && matchesYear && matchesType && matchesKeyword && matchesFondecyt
     })
-  }, [papers, searchTerm, selectedYear, selectedType, selectedKeyword])
+  }, [papers, searchTerm, selectedYear, selectedType, selectedKeyword, showOnlyFondecyt])
 
   const totalPages = Math.ceil(filteredPapers.length / articlesPerPage)
   const startIndex = (currentPage - 1) * articlesPerPage
@@ -386,6 +389,17 @@ export default function HomePage() {
               <BookOpen className="w-4 h-4 mr-2" />
               {papers.length} Research Papers
             </Badge>
+            <button
+              onClick={() => setShowOnlyFondecyt(!showOnlyFondecyt)}
+              className={`flex items-center gap-2 text-sm px-4 py-2 rounded-full border transition-colors ${
+                showOnlyFondecyt
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-background text-foreground border-border hover:bg-muted"
+              }`}
+            >
+              <Filter className="w-4 h-4" />
+              FONDECYT
+            </button>
             <Badge variant="outline" className="text-sm px-4 py-2">
               <Calendar className="w-4 h-4 mr-2" />
               {years.length > 0 ? `${Math.min(...years)}-${Math.max(...years)}` : '2023-2024'}
