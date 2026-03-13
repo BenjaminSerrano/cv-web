@@ -629,9 +629,13 @@ export default function HomePage() {
                             View
                           </a>
                         </Button>
-                        <Button size="sm" variant="ghost" className="px-3">
-                          <Download className="w-3 h-3" />
-                        </Button>
+                        {paper.url && paper.url !== '#' && (
+                          <Button size="sm" variant="ghost" className="px-3" asChild>
+                            <a href={paper.url} target="_blank" rel="noopener noreferrer">
+                              <Download className="w-3 h-3" />
+                            </a>
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </CardContent>
