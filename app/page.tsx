@@ -62,7 +62,7 @@ const collaboratorGroups = [
         id: 1,
         name: "Broderick Crawford",
         role: "Colaborador",
-              image: "/broderick_crawford.png",
+        image: "/broderick_crawford.png",
         imagePosition: "object-top",
         bio: "Full Professor at the School of Computer Engineering. I currently serve as Vice Dean of the Faculty of Engineering at the Pontificia Universidad Católica de Valparaíso, Chile.\n\nMy academic career began at the Universidad Técnica Federico Santa María, where I received my Bachelor's degree in Engineering Sciences in 1988 and my degree in Civil Computer Engineering in 1991. I subsequently obtained an MBA from the Universidad de Chile in 2001 and a PhD in Computer Engineering from UTFSM in 2011.\n\nMy research interests focus on artificial intelligence and optimization, covering areas such as combinatorial optimization, metaheuristics, autonomous search, and binarization of continuous algorithms. In this context, I have collaborated on more than 300 scientific articles published in various international conferences and mainstream journals in computer science, operations research, and artificial intelligence. Most of my scientific output focuses on developing robust solutions for optimization problems, both in benchmark settings and complex real-world applications.",
         expertise: ["Computational Intelligence", "Software Engineering", "Evolutionary Algorithms", "AI Applications"],
@@ -73,7 +73,7 @@ const collaboratorGroups = [
         id: 2,
         name: "Roberto Muñoz",
         role: "Colaborador",
-              image: "/roberto_munoz.png",
+        image: "/roberto_munoz.png",
         imagePosition: "object-top",
         bio: "Full Professor and currently serving as Director of the School of Computer Engineering at the Universidad de Valparaíso, Chile.\n\nMy academic training began at the same institution, where I received my degree in Applied Computer Engineering in 2009. I subsequently obtained a Master's in Computer Engineering (2012) and a Master's in Computer Science Engineering (2016), both from the Pontificia Universidad Católica de Valparaíso. I also hold a Master's in Teaching for Higher Education from Universidad Andrés Bello (2015) and earned my PhD in Computer Engineering from PUCV in 2018.\n\nMy research interests are primarily focused on educational informatics and human-computer interaction, including Multimodal Learning Analytics, learning analytics, and computing applied to health and autism spectrum disorders. In this area, I have contributed to more than 100 scientific publications and collaborated on various innovation and technology transfer projects, always seeking to develop computing solutions that generate a positive impact on society and education.",
         expertise: ["Computational Intelligence", "Evolutionary Computation", "Hybrid Optimization", "Complex Systems"],
@@ -84,7 +84,7 @@ const collaboratorGroups = [
         id: 3,
         name: "Fabian Riquelme",
         role: "Colaborador",
-              image: "/fabian_riquelme.png",
+        image: "/fabian_riquelme.png",
         imagePosition: "object-top",
         bio: "Professor in the Department of Computer Science at the Universitat Politècnica de Catalunya in Barcelona, Spain, with a prior academic career at the School of Computer Engineering at the Universidad de Valparaíso, Chile.\n\nMy academic background includes a degree in Civil Computer Engineering and a Master's in Computer Science from the Universidad de Concepción (Chile), both obtained with highest distinction. I subsequently earned a PhD in Computing from UPC with the outstanding cum laude distinction, through my research on structural and computational aspects of influence games.\n\nAs a researcher, I specialize in Cooperative Game Theory, Social Network Analysis, and Social Computing. My current work at the Polytechnic of Catalonia focuses on developing mathematical models and advanced algorithms to understand influence spreading and decision-making processes in complex environments. I have a strong international collaboration network and have led several competitive research projects aimed at connecting game theory with real-world applications in data science and social networks.",
         expertise: ["Social Network Analysis", "Multi-objective Optimization", "Influence Maximization", "Swarm Intelligence"],
@@ -95,7 +95,7 @@ const collaboratorGroups = [
         id: 4,
         name: "Ricardo Soto",
         role: "Colaborador",
-              image: "/ricardo_soto.png",
+        image: "/ricardo_soto.png",
         imagePosition: "object-top",
         bio: "Full Professor of Computer Engineering and currently Director of the School of Computer Engineering at the Pontificia Universidad Católica de Valparaíso. In 2003, I received my degree in Civil Computer Engineering from the same school, and in 2009, I completed my PhD in Computer Science at the University of Nantes, France.\n\nMy research interests include Metaheuristics, Autonomous Search, Machine Learning, and Constraint Programming. In this context, I have published more than 300 scientific articles in various international conferences and journals, several of which have been highlighted in topics such as Computer Science, Operations Research, Artificial Intelligence, and Programming Languages. I have also participated as leader and co-leader in a significant number of national and international projects in Computer Science and Artificial Intelligence.\n\nMy teaching experience includes courses such as Operations Research, Combinatorial Optimization, Constraint Programming, Metaheuristics, Data Structures, Logic Programming, Automata Theory, and Compiler Design. I have also supervised more than 80 Engineering, Master's, and PhD students, the vast majority of whom have participated in my research projects.",
         expertise: ["Constraint Programming", "Metaheuristics", "Artificial Intelligence", "Operations Research"],
@@ -111,7 +111,7 @@ const collaboratorGroups = [
         id: 5,
         name: "Emilio Flores",
         role: "PhD. Student",
-              image: "/emilio_flores.jpeg",
+        image: "/emilio_flores.jpeg",
         bio: "Emilio Flores is a PhD student specializing in applied mathematics and optimization theory. His work contributes to the theoretical foundations of metaheuristic algorithms and their practical applications.",
         expertise: ["Applied Mathematics", "Optimization Theory", "Metaheuristic Theory", "Mathematical Modeling"],
         publications: 62,
@@ -121,7 +121,7 @@ const collaboratorGroups = [
         id: 6,
         name: "Pablo Olivares",
         role: "PhD. Student",
-              image: "/pablo-olivares.png",
+        image: "/pablo-olivares.png",
         bio: "Pablo Olivares is a PhD student working on reinforcement learning applications in optimization algorithms. His research focuses on enhancing particle swarm optimization and other metaheuristics through intelligent learning mechanisms.",
         expertise: ["Reinforcement Learning", "Particle Swarm Optimization", "Learning-based Optimization", "Algorithm Enhancement"],
         publications: 14,
@@ -131,7 +131,7 @@ const collaboratorGroups = [
         id: 7,
         name: "Víctor Ríos",
         role: "PhD. Student",
-              image: "/victor_rios.png",
+        image: "/victor_rios.png",
         bio: "Víctor Ríos specializes in developing and implementing advanced optimization algorithms. His work includes search space reduction techniques, feature selection methods, and novel approaches to solving complex optimization problems.",
         expertise: ["Algorithm Development", "Search Space Reduction", "Feature Selection", "Optimization Techniques"],
         publications: 16,
@@ -141,7 +141,7 @@ const collaboratorGroups = [
         id: 8,
         name: "Omar Salinas",
         role: "PhD. Student",
-              image: "/omar_salinas.png",
+        image: "/omar_salinas.png",
         bio: "Omar Salinas is a PhD student with extensive experience in applying optimization techniques to security operations. His research focuses on developing intelligent systems for threat detection and response in cybersecurity environments.",
         expertise: ["Cybersecurity", "Threat Detection", "Security Operations", "Many-objective Optimization"],
         publications: 15,
@@ -151,7 +151,7 @@ const collaboratorGroups = [
         id: 9,
         name: "Benjamín Serrano",
         role: "PhD. Student",
-              image: "/benjamin_serrano.png",
+        image: "/benjamin_serrano.png",
         bio: "Benjamín Serrano is a PhD student contributing to various optimization projects. His work includes research on particle swarm optimization, feature selection algorithms, and search space optimization techniques.",
         expertise: ["Optimization", "Algorithm Testing", "Feature Selection", "Data Analysis"],
         publications: 8,
@@ -166,7 +166,7 @@ const collaboratorGroups = [
         id: 10,
         name: "Sandy Iturra",
         role: "Msc. Student",
-              image: "/sandy_iturra.png",
+        image: "/sandy_iturra.png",
         bio: "Sandy Iturra is a Master's student contributing to research in bio-inspired optimization and machine learning techniques.",
         expertise: ["Optimization", "Machine Learning", "Research"],
         publications: 0,
@@ -176,7 +176,7 @@ const collaboratorGroups = [
         id: 11,
         name: "Sebastián M. Guzmán",
         role: "Msc. Student",
-              image: "/sebastian_mguzman.png",
+        image: "/sebastian_mguzman.png",
         bio: "Sebastián Guzmán bridges the gap between optimization algorithms and software engineering practices. His research focuses on applying machine learning and optimization techniques to agile methodologies.",
         expertise: ["Software Engineering", "Agile Methodologies", "Team Optimization", "Machine Learning Applications"],
         publications: 10,
@@ -186,7 +186,7 @@ const collaboratorGroups = [
         id: 12,
         name: "Camilo Ravelo",
         role: "Msc. Student",
-              image: "/camilo_ravelo.png",
+        image: "/camilo_ravelo.png",
         bio: "Camilo Ravelo is a Master's student specializing in nature-inspired algorithms and their applications to optimization problems. His work on the Orca Predator Algorithm has shown significant contributions to metaheuristic optimization.",
         expertise: ["Nature-inspired Algorithms", "Orca Algorithm", "Feature Selection", "Algorithm Design"],
         publications: 18,
@@ -509,7 +509,7 @@ export default function HomePage() {
                         />
                         {isClickable && (
                           <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span className="text-white text-xs font-medium">Ver perfil</span>
+                            <span className="text-white text-xs font-medium">View profile</span>
                           </div>
                         )}
                       </div>
@@ -586,11 +586,11 @@ export default function HomePage() {
                           >
                             {isExpanded ? (
                               <>
-                                Ver menos <ChevronUp className="w-3 h-3 ml-1" />
+                                Show less <ChevronUp className="w-3 h-3 ml-1" />
                               </>
                             ) : (
                               <>
-                                Ver más <ChevronDown className="w-3 h-3 ml-1" />
+                                Show more <ChevronDown className="w-3 h-3 ml-1" />
                               </>
                             )}
                           </Button>
@@ -775,7 +775,7 @@ export default function HomePage() {
             />
           </div>
           <p className="text-muted-foreground">
-            © 2024 Academic Research Showcase. Featuring research by Rodrigo Olivares and collaborators.
+            © 2026 Academic Research Showcase. Featuring research by Rodrigo Olivares and collaborators.
           </p>
         </div>
       </footer>
