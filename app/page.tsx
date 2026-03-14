@@ -7,7 +7,7 @@ import {
   Calendar,
   Users,
   BookOpen,
-  Download,
+  Clock,
   ChevronDown,
   ChevronUp,
   ChevronLeft,
@@ -47,10 +47,8 @@ const principalInvestigator = {
   id: 0,
   name: "Rodrigo Olivares",
   role: "Principal Investigator",
-  affiliation: "Universidad de Valparaíso",
-  email: "rodrigo.olivares@uv.cl",
-  image: "/professional-researcher-portrait.png",
-  bio: "Dr. Rodrigo Olivares is a leading researcher in biomimetic algorithms and optimization techniques. His work focuses on applying nature-inspired computational methods to solve complex engineering and computer science problems. He has published extensively in top-tier journals and conferences, with particular expertise in particle swarm optimization, feature selection, and cybersecurity applications.",
+  image: "/placeholder-user.jpg",
+  bio: "I received my degree in Applied Computer Engineering in 2009, my Master's degree in Computer Engineering in 2015, and my Master's degree in Computer Science Engineering in 2016. I subsequently obtained my PhD in Computer Engineering in 2019.\n\nI currently serve as an Adjunct Professor at the School of Computer Engineering of the Universidad de Valparaíso and hold the position of Head of the Computer Engineering program. My research track record includes collaboration on more than 80 scientific articles, published in prestigious international conferences and mainstream journals.\n\nMy research interests are primarily focused on the study of reactive and self-adaptive metaheuristics, swarm intelligence methods, global optimization, and the use of machine learning in support of bio-solvers.",
   expertise: ["Biomimetic Algorithms", "Optimization", "Machine Learning", "Cybersecurity"],
   publications: 50,
   hIndex: 15,
@@ -64,10 +62,9 @@ const collaboratorGroups = [
         id: 1,
         name: "Broderick Crawford",
         role: "Colaborador",
-        affiliation: "Universidad de Valparaíso",
-        email: "broderick.crawford@uv.cl",
-        image: "/computer-science-professor-portrait.png",
-        bio: "Dr. Broderick Crawford is a renowned expert in computational intelligence and software engineering. His research focuses on the intersection of artificial intelligence and software development, with significant contributions to evolutionary algorithms and their applications in real-world problems.",
+              image: "/broderick_crawford.png",
+        imagePosition: "object-top",
+        bio: "Full Professor at the School of Computer Engineering. I currently serve as Vice Dean of the Faculty of Engineering at the Pontificia Universidad Católica de Valparaíso, Chile.\n\nMy academic career began at the Universidad Técnica Federico Santa María, where I received my Bachelor's degree in Engineering Sciences in 1988 and my degree in Civil Computer Engineering in 1991. I subsequently obtained an MBA from the Universidad de Chile in 2001 and a PhD in Computer Engineering from UTFSM in 2011.\n\nMy research interests focus on artificial intelligence and optimization, covering areas such as combinatorial optimization, metaheuristics, autonomous search, and binarization of continuous algorithms. In this context, I have collaborated on more than 300 scientific articles published in various international conferences and mainstream journals in computer science, operations research, and artificial intelligence. Most of my scientific output focuses on developing robust solutions for optimization problems, both in benchmark settings and complex real-world applications.",
         expertise: ["Computational Intelligence", "Software Engineering", "Evolutionary Algorithms", "AI Applications"],
         publications: 120,
         hIndex: 22,
@@ -76,10 +73,9 @@ const collaboratorGroups = [
         id: 2,
         name: "Roberto Muñoz",
         role: "Colaborador",
-        affiliation: "Universidad de Valparaíso",
-        email: "roberto.munoz@uv.cl",
-        image: "/placeholder-user.jpg",
-        bio: "Dr. Roberto Muñoz is a senior researcher with extensive experience in computational intelligence and optimization techniques. His research focuses on developing advanced algorithms for complex problem-solving scenarios, with particular expertise in evolutionary computation and hybrid optimization approaches.",
+              image: "/roberto_munoz.png",
+        imagePosition: "object-top",
+        bio: "Full Professor and currently serving as Director of the School of Computer Engineering at the Universidad de Valparaíso, Chile.\n\nMy academic training began at the same institution, where I received my degree in Applied Computer Engineering in 2009. I subsequently obtained a Master's in Computer Engineering (2012) and a Master's in Computer Science Engineering (2016), both from the Pontificia Universidad Católica de Valparaíso. I also hold a Master's in Teaching for Higher Education from Universidad Andrés Bello (2015) and earned my PhD in Computer Engineering from PUCV in 2018.\n\nMy research interests are primarily focused on educational informatics and human-computer interaction, including Multimodal Learning Analytics, learning analytics, and computing applied to health and autism spectrum disorders. In this area, I have contributed to more than 100 scientific publications and collaborated on various innovation and technology transfer projects, always seeking to develop computing solutions that generate a positive impact on society and education.",
         expertise: ["Computational Intelligence", "Evolutionary Computation", "Hybrid Optimization", "Complex Systems"],
         publications: 85,
         hIndex: 18,
@@ -88,10 +84,9 @@ const collaboratorGroups = [
         id: 3,
         name: "Fabian Riquelme",
         role: "Colaborador",
-        affiliation: "Universidad de Valparaíso",
-        email: "fabian.riquelme@uv.cl",
-        image: "/academic-professor-portrait.png",
-        bio: "Dr. Fabian Riquelme specializes in social network analysis and multi-objective optimization. His research focuses on influence maximization problems and the application of swarm intelligence methods to complex social networks.",
+              image: "/fabian_riquelme.png",
+        imagePosition: "object-top",
+        bio: "Professor in the Department of Computer Science at the Universitat Politècnica de Catalunya in Barcelona, Spain, with a prior academic career at the School of Computer Engineering at the Universidad de Valparaíso, Chile.\n\nMy academic background includes a degree in Civil Computer Engineering and a Master's in Computer Science from the Universidad de Concepción (Chile), both obtained with highest distinction. I subsequently earned a PhD in Computing from UPC with the outstanding cum laude distinction, through my research on structural and computational aspects of influence games.\n\nAs a researcher, I specialize in Cooperative Game Theory, Social Network Analysis, and Social Computing. My current work at the Polytechnic of Catalonia focuses on developing mathematical models and advanced algorithms to understand influence spreading and decision-making processes in complex environments. I have a strong international collaboration network and have led several competitive research projects aimed at connecting game theory with real-world applications in data science and social networks.",
         expertise: ["Social Network Analysis", "Multi-objective Optimization", "Influence Maximization", "Swarm Intelligence"],
         publications: 25,
         hIndex: 12,
@@ -100,10 +95,9 @@ const collaboratorGroups = [
         id: 4,
         name: "Ricardo Soto",
         role: "Colaborador",
-        affiliation: "Universidad de Valparaíso",
-        email: "ricardo.soto@uv.cl",
-        image: "/academic-professor-portrait.png",
-        bio: "Dr. Ricardo Soto is a distinguished professor and researcher specializing in constraint programming and metaheuristic algorithms. His research contributions span multiple domains including artificial intelligence, operations research, and computational optimization.",
+              image: "/ricardo_soto.png",
+        imagePosition: "object-top",
+        bio: "Full Professor of Computer Engineering and currently Director of the School of Computer Engineering at the Pontificia Universidad Católica de Valparaíso. In 2003, I received my degree in Civil Computer Engineering from the same school, and in 2009, I completed my PhD in Computer Science at the University of Nantes, France.\n\nMy research interests include Metaheuristics, Autonomous Search, Machine Learning, and Constraint Programming. In this context, I have published more than 300 scientific articles in various international conferences and journals, several of which have been highlighted in topics such as Computer Science, Operations Research, Artificial Intelligence, and Programming Languages. I have also participated as leader and co-leader in a significant number of national and international projects in Computer Science and Artificial Intelligence.\n\nMy teaching experience includes courses such as Operations Research, Combinatorial Optimization, Constraint Programming, Metaheuristics, Data Structures, Logic Programming, Automata Theory, and Compiler Design. I have also supervised more than 80 Engineering, Master's, and PhD students, the vast majority of whom have participated in my research projects.",
         expertise: ["Constraint Programming", "Metaheuristics", "Artificial Intelligence", "Operations Research"],
         publications: 150,
         hIndex: 25,
@@ -117,9 +111,7 @@ const collaboratorGroups = [
         id: 5,
         name: "Emilio Flores",
         role: "PhD. Student",
-        affiliation: "Universidad de Valparaíso",
-        email: "emilio.flores@uv.cl",
-        image: "/placeholder-user.jpg",
+              image: "/emilio_flores.jpeg",
         bio: "Emilio Flores is a PhD student specializing in applied mathematics and optimization theory. His work contributes to the theoretical foundations of metaheuristic algorithms and their practical applications.",
         expertise: ["Applied Mathematics", "Optimization Theory", "Metaheuristic Theory", "Mathematical Modeling"],
         publications: 62,
@@ -129,9 +121,7 @@ const collaboratorGroups = [
         id: 6,
         name: "Pablo Olivares",
         role: "PhD. Student",
-        affiliation: "Universidad de Valparaíso",
-        email: "pablo.olivares@uv.cl",
-        image: "/young-researcher-portrait.png",
+              image: "/pablo-olivares.png",
         bio: "Pablo Olivares is a PhD student working on reinforcement learning applications in optimization algorithms. His research focuses on enhancing particle swarm optimization and other metaheuristics through intelligent learning mechanisms.",
         expertise: ["Reinforcement Learning", "Particle Swarm Optimization", "Learning-based Optimization", "Algorithm Enhancement"],
         publications: 14,
@@ -141,9 +131,7 @@ const collaboratorGroups = [
         id: 7,
         name: "Víctor Ríos",
         role: "PhD. Student",
-        affiliation: "Universidad de Valparaíso",
-        email: "victor.rios@uv.cl",
-        image: "/computer-science-professor-portrait.png",
+              image: "/victor_rios.png",
         bio: "Víctor Ríos specializes in developing and implementing advanced optimization algorithms. His work includes search space reduction techniques, feature selection methods, and novel approaches to solving complex optimization problems.",
         expertise: ["Algorithm Development", "Search Space Reduction", "Feature Selection", "Optimization Techniques"],
         publications: 16,
@@ -153,9 +141,7 @@ const collaboratorGroups = [
         id: 8,
         name: "Omar Salinas",
         role: "PhD. Student",
-        affiliation: "Universidad de Valparaíso",
-        email: "omar.salinas@uv.cl",
-        image: "/cybersecurity-expert-portrait.png",
+              image: "/omar_salinas.png",
         bio: "Omar Salinas is a PhD student with extensive experience in applying optimization techniques to security operations. His research focuses on developing intelligent systems for threat detection and response in cybersecurity environments.",
         expertise: ["Cybersecurity", "Threat Detection", "Security Operations", "Many-objective Optimization"],
         publications: 15,
@@ -165,9 +151,7 @@ const collaboratorGroups = [
         id: 9,
         name: "Benjamín Serrano",
         role: "PhD. Student",
-        affiliation: "Universidad de Valparaíso",
-        email: "benjamin.serrano@uv.cl",
-        image: "/young-researcher-portrait.png",
+              image: "/benjamin_serrano.png",
         bio: "Benjamín Serrano is a PhD student contributing to various optimization projects. His work includes research on particle swarm optimization, feature selection algorithms, and search space optimization techniques.",
         expertise: ["Optimization", "Algorithm Testing", "Feature Selection", "Data Analysis"],
         publications: 8,
@@ -182,9 +166,7 @@ const collaboratorGroups = [
         id: 10,
         name: "Sandy Iturra",
         role: "Msc. Student",
-        affiliation: "Universidad de Valparaíso",
-        email: "",
-        image: "/placeholder-user.jpg",
+              image: "/sandy_iturra.png",
         bio: "Sandy Iturra is a Master's student contributing to research in bio-inspired optimization and machine learning techniques.",
         expertise: ["Optimization", "Machine Learning", "Research"],
         publications: 0,
@@ -194,9 +176,7 @@ const collaboratorGroups = [
         id: 11,
         name: "Sebastián M. Guzmán",
         role: "Msc. Student",
-        affiliation: "Universidad de Valparaíso",
-        email: "sebastian.guzman@uv.cl",
-        image: "/software-engineer-researcher-portrait.png",
+              image: "/sebastian_mguzman.png",
         bio: "Sebastián Guzmán bridges the gap between optimization algorithms and software engineering practices. His research focuses on applying machine learning and optimization techniques to agile methodologies.",
         expertise: ["Software Engineering", "Agile Methodologies", "Team Optimization", "Machine Learning Applications"],
         publications: 10,
@@ -206,9 +186,7 @@ const collaboratorGroups = [
         id: 12,
         name: "Camilo Ravelo",
         role: "Msc. Student",
-        affiliation: "Universidad de Valparaíso",
-        email: "camilo.ravelo@uv.cl",
-        image: "/young-researcher-portrait.png",
+              image: "/camilo_ravelo.png",
         bio: "Camilo Ravelo is a Master's student specializing in nature-inspired algorithms and their applications to optimization problems. His work on the Orca Predator Algorithm has shown significant contributions to metaheuristic optimization.",
         expertise: ["Nature-inspired Algorithms", "Orca Algorithm", "Feature Selection", "Algorithm Design"],
         publications: 18,
@@ -515,30 +493,35 @@ export default function HomePage() {
             <div key={group.category} className="mb-10">
               <h3 className="text-xl font-semibold text-foreground mb-6 border-b pb-2">{group.category}</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                {group.members.map((collaborator) => (
-                  <div
-                    key={collaborator.id}
-                    className="group cursor-pointer"
-                    onClick={() => setSelectedCollaborator(collaborator)}
-                  >
-                    <div className="relative overflow-hidden rounded-full aspect-square mb-4 group-hover:scale-105 transition-transform duration-300">
-                      <img
-                        src={collaborator.image || "/placeholder.svg"}
-                        alt={collaborator.name}
-                        className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
-                      />
-                      <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span className="text-white text-xs font-medium">Ver perfil</span>
+                {group.members.map((collaborator) => {
+                  const isClickable = group.category === "Colaboradores"
+                  return (
+                    <div
+                      key={collaborator.id}
+                      className={`group ${isClickable ? 'cursor-pointer' : ''}`}
+                      onClick={isClickable ? () => setSelectedCollaborator(collaborator) : undefined}
+                    >
+                      <div className="relative overflow-hidden rounded-full aspect-square mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <img
+                          src={collaborator.image || "/placeholder.svg"}
+                          alt={collaborator.name}
+                          className={`w-full h-full object-cover transition-all duration-300 ${'imagePosition' in collaborator ? collaborator.imagePosition : ''} ${isClickable ? 'group-hover:brightness-110' : ''}`}
+                        />
+                        {isClickable && (
+                          <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span className="text-white text-xs font-medium">Ver perfil</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-center">
+                        <h3 className={`font-semibold text-sm transition-colors ${isClickable ? 'group-hover:text-primary' : ''}`}>
+                          {collaborator.name}
+                        </h3>
+                        <p className="text-xs text-muted-foreground mt-1">{collaborator.role}</p>
                       </div>
                     </div>
-                    <div className="text-center">
-                      <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">
-                        {collaborator.name}
-                      </h3>
-                      <p className="text-xs text-muted-foreground mt-1">{collaborator.role}</p>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           ))}
@@ -634,18 +617,18 @@ export default function HomePage() {
                       </div>
 
                       <div className="flex gap-2 pt-2">
-                        <Button size="sm" variant="outline" className="flex-1 bg-transparent" asChild>
-                          <a href={paper.url || '#'} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="w-3 h-3 mr-1" />
-                            View
-                          </a>
-                        </Button>
-                        {paper.url && paper.url !== '#' && (
-                          <Button size="sm" variant="ghost" className="px-3" asChild>
+                        {paper.url ? (
+                          <Button size="sm" variant="outline" className="flex-1 bg-transparent" asChild>
                             <a href={paper.url} target="_blank" rel="noopener noreferrer">
-                              <Download className="w-3 h-3" />
+                              <ExternalLink className="w-3 h-3 mr-1" />
+                              View
                             </a>
                           </Button>
+                        ) : (
+                          <div className="flex-1 flex items-center justify-center gap-1.5 rounded-md border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs text-amber-700 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-400">
+                            <Clock className="w-3 h-3" />
+                            Under Review
+                          </div>
                         )}
                       </div>
                     </div>
@@ -733,15 +716,13 @@ export default function HomePage() {
                     <img
                       src={selectedCollaborator.image || "/placeholder.svg"}
                       alt={selectedCollaborator.name}
-                      className="w-32 h-32 rounded-full object-cover mx-auto md:mx-0"
+                      className={`w-32 h-32 rounded-full object-cover mx-auto md:mx-0 ${'imagePosition' in selectedCollaborator ? selectedCollaborator.imagePosition : ''}`}
                     />
                   </div>
 
                   <div className="flex-1 space-y-4">
                     <div>
                       <h3 className="text-lg font-semibold text-primary">{selectedCollaborator.role}</h3>
-                      <p className="text-muted-foreground">{selectedCollaborator.affiliation}</p>
-                      <p className="text-sm text-muted-foreground">{selectedCollaborator.email}</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -759,7 +740,7 @@ export default function HomePage() {
 
                 <div>
                   <h4 className="font-semibold mb-2">Biography</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{selectedCollaborator.bio}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{selectedCollaborator.bio}</p>
                 </div>
 
                 <div>

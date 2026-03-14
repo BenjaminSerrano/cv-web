@@ -271,7 +271,7 @@ export function bibEntryToPaper(entry: BibTeXEntry, id: string): ParsedPaper | n
     number: fields.number,
     pages: fields.pages,
     doi: fields.doi,
-    url: fields.url,
+    url: fields.url?.startsWith('http') ? fields.url : undefined,
     type,
     keywords,
     publisher: fields.publisher,
