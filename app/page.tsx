@@ -57,12 +57,12 @@ const principalInvestigator = {
 
 const collaboratorGroups = [
   {
-    category: "Colaboradores",
+    category: "Collaborators",
     members: [
       {
         id: 1,
         name: "Broderick Crawford",
-        role: "Colaborador",
+        role: "Collaborator",
         image: "/broderick_crawford.png",
         imagePosition: "object-top",
         bio: "Full Professor at the School of Computer Engineering. I currently serve as Vice Dean of the Faculty of Engineering at the Pontificia Universidad Católica de Valparaíso, Chile.\n\nMy academic career began at the Universidad Técnica Federico Santa María, where I received my Bachelor's degree in Engineering Sciences in 1988 and my degree in Civil Computer Engineering in 1991. I subsequently obtained an MBA from the Universidad de Chile in 2001 and a PhD in Computer Engineering from UTFSM in 2011.\n\nMy research interests focus on artificial intelligence and optimization, covering areas such as combinatorial optimization, metaheuristics, autonomous search, and binarization of continuous algorithms. In this context, I have collaborated on more than 300 scientific articles published in various international conferences and mainstream journals in computer science, operations research, and artificial intelligence. Most of my scientific output focuses on developing robust solutions for optimization problems, both in benchmark settings and complex real-world applications.",
@@ -73,7 +73,7 @@ const collaboratorGroups = [
       {
         id: 2,
         name: "Roberto Muñoz",
-        role: "Colaborador",
+        role: "Collaborator",
         image: "/roberto_munoz.png",
         imagePosition: "object-top",
         bio: "Full Professor and currently serving as Director of the School of Computer Engineering at the Universidad de Valparaíso, Chile.\n\nMy academic training began at the same institution, where I received my degree in Applied Computer Engineering in 2009. I subsequently obtained a Master's in Computer Engineering (2012) and a Master's in Computer Science Engineering (2016), both from the Pontificia Universidad Católica de Valparaíso. I also hold a Master's in Teaching for Higher Education from Universidad Andrés Bello (2015) and earned my PhD in Computer Engineering from PUCV in 2018.\n\nMy research interests are primarily focused on educational informatics and human-computer interaction, including Multimodal Learning Analytics, learning analytics, and computing applied to health and autism spectrum disorders. In this area, I have contributed to more than 100 scientific publications and collaborated on various innovation and technology transfer projects, always seeking to develop computing solutions that generate a positive impact on society and education.",
@@ -84,7 +84,7 @@ const collaboratorGroups = [
       {
         id: 3,
         name: "Fabian Riquelme",
-        role: "Colaborador",
+        role: "Collaborator",
         image: "/fabian_riquelme.png",
         imagePosition: "object-top",
         bio: "Professor in the Department of Computer Science at the Universitat Politècnica de Catalunya in Barcelona, Spain, with a prior academic career at the School of Computer Engineering at the Universidad de Valparaíso, Chile.\n\nMy academic background includes a degree in Civil Computer Engineering and a Master's in Computer Science from the Universidad de Concepción (Chile), both obtained with highest distinction. I subsequently earned a PhD in Computing from UPC with the outstanding cum laude distinction, through my research on structural and computational aspects of influence games.\n\nAs a researcher, I specialize in Cooperative Game Theory, Social Network Analysis, and Social Computing. My current work at the Polytechnic of Catalonia focuses on developing mathematical models and advanced algorithms to understand influence spreading and decision-making processes in complex environments. I have a strong international collaboration network and have led several competitive research projects aimed at connecting game theory with real-world applications in data science and social networks.",
@@ -95,7 +95,7 @@ const collaboratorGroups = [
       {
         id: 4,
         name: "Ricardo Soto",
-        role: "Colaborador",
+        role: "Collaborator",
         image: "/ricardo_soto.png",
         imagePosition: "object-top",
         bio: "Full Professor of Computer Engineering and currently Director of the School of Computer Engineering at the Pontificia Universidad Católica de Valparaíso. In 2003, I received my degree in Civil Computer Engineering from the same school, and in 2009, I completed my PhD in Computer Science at the University of Nantes, France.\n\nMy research interests include Metaheuristics, Autonomous Search, Machine Learning, and Constraint Programming. In this context, I have published more than 300 scientific articles in various international conferences and journals, several of which have been highlighted in topics such as Computer Science, Operations Research, Artificial Intelligence, and Programming Languages. I have also participated as leader and co-leader in a significant number of national and international projects in Computer Science and Artificial Intelligence.\n\nMy teaching experience includes courses such as Operations Research, Combinatorial Optimization, Constraint Programming, Metaheuristics, Data Structures, Logic Programming, Automata Theory, and Compiler Design. I have also supervised more than 80 Engineering, Master's, and PhD students, the vast majority of whom have participated in my research projects.",
@@ -495,14 +495,14 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold text-foreground mb-6 border-b pb-2">{group.category}</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {group.members.map((collaborator) => {
-                  const isClickable = group.category === "Colaboradores"
+                  const isClickable = group.category === "Collaborators"
                   return (
                     <div
                       key={collaborator.id}
                       className={`group ${isClickable ? 'cursor-pointer' : ''}`}
                       onClick={isClickable ? () => setSelectedCollaborator(collaborator) : undefined}
                     >
-                      <div className="relative overflow-hidden rounded-full aspect-square mb-4 group-hover:scale-105 transition-transform duration-300">
+                      <div className="relative overflow-hidden rounded-full w-40 h-40 mx-auto mb-4 group-hover:scale-105 transition-transform duration-300">
                         <img
                           src={collaborator.image || "/placeholder.svg"}
                           alt={collaborator.name}
