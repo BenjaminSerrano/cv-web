@@ -47,7 +47,8 @@ const principalInvestigator = {
   id: 0,
   name: "Rodrigo Olivares",
   role: "Principal Investigator",
-  image: "/placeholder-user.jpg",
+  image: "/rodrigo_olivares.jpeg",
+  imagePosition: "object-top",
   bio: "I received my degree in Applied Computer Engineering in 2009, my Master's degree in Computer Engineering in 2015, and my Master's degree in Computer Science Engineering in 2016. I subsequently obtained my PhD in Computer Engineering in 2019.\n\nI currently serve as an Adjunct Professor at the School of Computer Engineering of the Universidad de Valparaíso and hold the position of Head of the Computer Engineering program. My research track record includes collaboration on more than 80 scientific articles, published in prestigious international conferences and mainstream journals.\n\nMy research interests are primarily focused on the study of reactive and self-adaptive metaheuristics, swarm intelligence methods, global optimization, and the use of machine learning in support of bio-solvers.",
   expertise: ["Biomimetic Algorithms", "Optimization", "Machine Learning", "Cybersecurity"],
   publications: 50,
@@ -477,7 +478,7 @@ export default function HomePage() {
                 <img
                   src={principalInvestigator.image || "/placeholder.svg"}
                   alt={principalInvestigator.name}
-                  className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
+                  className={`w-full h-full object-cover group-hover:brightness-110 transition-all duration-300 ${'imagePosition' in principalInvestigator ? principalInvestigator.imagePosition : ''}`}
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <span className="text-white text-xs font-medium">Ver perfil</span>

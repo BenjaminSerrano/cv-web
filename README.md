@@ -1,95 +1,93 @@
 # Academic Papers Showcase
 
-Sitio web para visualizar y explorar publicaciones de investigación del grupo de investigación FONDECYT de la **Universidad de Valparaíso**, liderado por el Dr. Rodrigo Olivares. El proyecto se enfoca en el uso de comportamientos de aprendizaje artificial para balancear inteligentemente los procedimientos de convergencia y búsqueda en solvers de optimización bioinspirados.
+Website to explore and visualize research publications from the FONDECYT research group at **Universidad de Valparaíso**, led by Dr. Rodrigo Olivares. The project focuses on using artificial learning behaviors to intelligently balance convergence and search procedures in bio-inspired optimization solvers.
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 con App Router
-- **Lenguaje:** TypeScript
+- **Framework:** Next.js 14 with App Router
+- **Language:** TypeScript
 - **UI:** Tailwind CSS + shadcn/ui (Radix UI)
-- **Iconos:** Lucide React
+- **Icons:** Lucide React
 - **Analytics:** Vercel Analytics
 - **Package Manager:** pnpm
 
-## Funcionalidades
+## Features
 
-- **Catálogo de papers:** Carga y parsea archivos BibTeX (`.bib`) con papers de conferencias y artículos de revista.
-- **Búsqueda y filtrado:** Búsqueda por título, autores y keywords. Filtros por año, tipo de publicación y palabras clave.
-- **Paginación:** Navegación paginada para papers y miembros del equipo.
-- **Perfiles del equipo:** 14 investigadores con biografía, áreas de expertise, métricas de publicación e información de contacto.
-- **Tarjetas de papers:** Muestran tipo, año, título, autores, abstract expandible, keywords y enlaces externos.
-- **Diseño responsive:** Adaptado para móvil, tablet y escritorio.
-- **Modo oscuro:** Soporte mediante next-themes.
+- **Papers catalog:** Loads and parses BibTeX (`.bib`) files with conference papers and journal articles.
+- **Search & filters:** Search by title, authors, and keywords. Filter by year, publication type, and keywords.
+- **Pagination:** Paginated navigation for papers.
+- **Team profiles:** Collaborators with biography, expertise areas, and publication metrics (clickable).
+- **Paper cards:** Show type, year, title, authors, expandable abstract, keywords, and external links.
+- **Under Review badge:** Papers without a URL display an "Under Review" badge instead of a View button.
+- **Responsive design:** Adapted for mobile, tablet, and desktop.
+- **Dark mode:** Supported via next-themes.
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
-academic-papers-showcase/
+cv-web/
 ├── app/
-│   ├── layout.tsx          # Layout raíz con metadata y fuentes
-│   ├── page.tsx            # Página principal (componente central)
-│   ├── loading.tsx         # Skeleton de carga
-│   └── globals.css         # Estilos globales con variables CSS
+│   ├── layout.tsx          # Root layout with metadata and fonts
+│   ├── page.tsx            # Main page (core component)
+│   ├── loading.tsx         # Loading skeleton
+│   └── globals.css         # Global styles with CSS variables
 ├── components/
-│   ├── ui/                 # Componentes shadcn/ui (~50 componentes)
-│   └── theme-provider.tsx  # Proveedor de contexto para temas
+│   ├── ui/                 # shadcn/ui components (~50 components)
+│   └── theme-provider.tsx  # Theme context provider
 ├── hooks/
-│   ├── use-toast.ts        # Hook para notificaciones toast
-│   └── use-mobile.ts       # Hook para detección de dispositivos móviles
+│   ├── use-toast.ts        # Toast notifications hook
+│   └── use-mobile.ts       # Mobile device detection hook
 ├── lib/
-│   ├── bibtex-parser.ts    # Parser de archivos BibTeX
-│   └── utils.ts            # Utilidades (cn helper)
+│   ├── bibtex-parser.ts    # BibTeX file parser
+│   └── utils.ts            # Utilities (cn helper)
 ├── public/
-│   ├── refsConf.bib        # Papers de conferencias (BibTeX)
-│   ├── refsJour.bib        # Artículos de revista (BibTeX)
-│   └── *.png               # Imágenes del equipo y logos
+│   ├── refsConf.bib        # Conference papers (BibTeX)
+│   ├── refsJour.bib        # Journal articles (BibTeX)
+│   ├── refs.bib            # FONDECYT papers (BibTeX)
+│   └── *.png / *.jpeg      # Team photos and logos
 └── package.json
 ```
 
-## Instalación y Uso
+## Installation & Usage
 
-### Requisitos previos
+### Prerequisites
 
 - Node.js 18+
 - pnpm
 
-### Desarrollo
+### Development
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-El sitio estará disponible en `http://localhost:3000`.
+The site will be available at `http://localhost:3000`.
 
-### Build de producción
+### Production build
 
 ```bash
 pnpm build
-pnpm start
 ```
 
-### Linting
+### Deployment (Apache)
 
 ```bash
-pnpm lint
+cd /tmp/cv-web && git pull && rm -rf node_modules && pnpm install && pnpm build && sudo cp -r out/* /Library/WebServer/Documents/
 ```
 
-## Datos
+## Data
 
-Los papers se cargan desde archivos BibTeX ubicados en `/public/`:
+Papers are loaded from BibTeX files located in `/public/`:
 
-- `refsConf.bib` — Papers de conferencias (~25 publicaciones)
-- `refsJour.bib` — Artículos de revista (~25 publicaciones)
+- `refsConf.bib` — Conference papers
+- `refsJour.bib` — Journal articles
+- `refs.bib` — FONDECYT-tagged papers
 
-Los datos del equipo de investigación están definidos directamente en `app/page.tsx`.
+Team member data is defined directly in `app/page.tsx`.
 
-## Deployment
+Papers without a valid URL (e.g., `to appear`) are automatically shown as "Under Review".
 
-El proyecto está configurado para desplegarse en **Netlify** o **Vercel**. No requiere variables de entorno ni backend; todos los datos son estáticos.
-
-La optimización de imágenes de Next.js está deshabilitada (`unoptimized: true`) para compatibilidad con hosting estático.
-
-## Repositorio
+## Repository
 
 [https://github.com/BenjaminSerrano/cv-web](https://github.com/BenjaminSerrano/cv-web)
